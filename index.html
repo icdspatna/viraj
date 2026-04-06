@@ -58,6 +58,7 @@
     <button class="nav-btn" onclick="showPage('p6', true)">कार्यालय आदेश 🔒</button>
     <button class="nav-btn" onclick="showPage('p7', true)">प्राप्त पत्र 🔒</button>
     <button class="nav-btn" onclick="showPage('p8')">महत्वपूर्ण लिंक</button>
+    <button class="nav-btn" onclick="showPage('p9')">App</button>
 </div>
 
 <!-- PAGE 1: HOME -->
@@ -225,7 +226,163 @@
         </ul>
     </div>
 </div>
+<!-- PAGE 9: App -->
+<!-- PAGE 9: LINKS -->
+<div id="p9" class="page">
+    
+   <title>पोषाहार स्टॉक कैलकुलेटर</title>
+    <style>
+        :root { --primary: #2c3e50; --secondary: #27ae60; --danger: #e74c3c; --light: #ecf0f1; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f2f5; margin: 0; padding: 15px; }
+        .container { max-width: 1000px; margin: auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: var(--primary); border-bottom: 3px solid var(--secondary); padding-bottom: 10px; }
+        
+        /* Opening Stock Section */
+        .section-title { background: var(--primary); color: white; padding: 10px; border-radius: 5px; margin-top: 20px; font-size: 18px; }
+        .stock-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin: 15px 0; padding: 15px; background: var(--light); border-radius: 8px; }
+        .stock-item { display: flex; flex-direction: column; }
+        .stock-item label { font-size: 14px; font-weight: bold; margin-bottom: 5px; color: #444; }
+        .stock-item input { padding: 8px; border: 1px solid #bdc3c7; border-radius: 4px; }
 
+        /* Daily Entry Section */
+        .entry-box { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; align-items: center; background: #d5f5e3; padding: 20px; border-radius: 8px; margin: 20px 0; border: 1px solid var(--secondary); }
+        .entry-box select, .entry-box input { padding: 12px; font-size: 16px; border-radius: 6px; border: 1px solid #999; width: 200px; }
+
+        /* Table Design */
+        .table-container { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: center; }
+        th { background: var(--primary); color: white; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .low-stock { background: #ffdada !important; color: var(--danger); font-weight: bold; }
+        
+        .footer-btns { margin-top: 20px; display: flex; gap: 10px; justify-content: flex-end; }
+        button { padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .btn-save { background: var(--secondary); color: white; }
+        .btn-print { background: #3498db; color: white; }
+        button:hover { opacity: 0.8; }
+
+        @media print { .stock-grid, .entry-box, .footer-btns { display: none; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🍎 आंगनबाड़ी पोषाहार स्टॉक रजिस्टर</h2>
+
+    <div class="section-title">📦 महीने का ओपनिंग स्टॉक सेट करें (KG/Unit में)</div>
+    <div class="stock-grid" id="stockInputs">
+        <!-- Javascript will fill this based on your image list -->
+    </div>
+
+    <div class="section-title">🕒 आज की एंट्री</div>
+    <div class="entry-box">
+        <div>
+            <label>दिन चुनें:</label><br>
+            <select id="daySelect" onchange="calculate()">
+                <option value="MON">सोमवार (चावल, चना, सब्जी, तेल, मूंगफली)</option>
+                <option value="TUE">मंगलवार (आलू, चना, चावल, फल)</option>
+                <option value="WED">बुधवार (चावल, सोयाबीन, टमाटर, तेल, गुड़, अंडा)</option>
+                <option value="THU">गुरुवार (चावल, गुड़, मूंगफली, फल)</option>
+                <option value="FRI">शुक्रवार (चावल, दाल, कद्दू, तेल, अंडा)</option>
+                <option value="SAT">शनिवार (चावल, दाल, सब्जी, तेल, फल)</option>
+            </select>
+        </div>
+        <div>
+            <label>बच्चों की संख्या:</label><br>
+            <input type="number" id="childCount" placeholder="संख्या दर्ज करें" oninput="calculate()">
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>सामग्री</th>
+                    <th>तय मात्रा (gm/Unit)</th>
+                    <th>आज की खपत</th>
+                    <th>उपलब्ध स्टॉक</th>
+                    <th>बचा हुआ स्टॉक</th>
+                </tr>
+            </thead>
+            <tbody id="resultBody"></tbody>
+        </table>
+    </div>
+
+    <div class="footer-btns">
+        <button class="btn-save" onclick="saveStock()">💾 स्टॉक सेव करें</button>
+        <button class="btn-print" onclick="window.print()">🖨️ रिपोर्ट प्रिंट करें</button>
+    </div>
+</div>
+
+<script>
+    // इमेज के अनुसार सामग्री की मास्टर लिस्ट
+    const items = [
+        { name: "चावल", type: "KG" }, { name: "दाल", type: "KG" }, 
+        { name: "तेल", type: "KG" }, { name: "चना", type: "KG" }, 
+        { name: "आलू", type: "KG" }, { name: "हरी सब्जी", type: "KG" },
+        { name: "सोयाबीन सब्जी", type: "KG" }, { name: "पायज टमाटर", type: "KG" },
+        { name: "गुड़", type: "KG" }, { name: "मूंगफली", type: "KG" },
+        { name: "कद्दू", type: "KG" }, { name: "फल", type: "Unit" },
+        { name: "अंडा", type: "Unit" }
+    ];
+
+    // इमेज के अनुसार साप्ताहिक मेनू
+    const menu = {
+        "MON": [{n:"चावल",q:70}, {n:"चना",q:20}, {n:"हरी सब्जी",q:25}, {n:"तेल",q:5}, {n:"मूंगफली",q:15}],
+        "TUE": [{n:"आलू",q:60}, {n:"चना",q:20}, {n:"चावल",q:70}, {n:"फल",q:1}],
+        "WED": [{n:"चावल",q:60}, {n:"सोयाबीन सब्जी",q:20}, {n:"पायज टमाटर",q:25}, {n:"तेल",q:5}, {n:"गुड़",q:20}, {n:"अंडा",q:1}],
+        "THU": [{n:"चावल",q:60}, {n:"गुड़",q:30}, {n:"मूंगफली",q:15}, {n:"फल",q:1}],
+        "FRI": [{n:"चावल",q:70}, {n:"दाल",q:25}, {n:"कद्दू",q:100}, {n:"तेल",q:5}, {n:"अंडा",q:1}],
+        "SAT": [{n:"चावल",q:60}, {n:"दाल",q:20}, {n:"हरी सब्जी",q:25}, {n:"तेल",q:5}, {n:"फल",q:1}]
+    };
+
+    // स्टॉक बॉक्स बनाना
+    const grid = document.getElementById('stockInputs');
+    items.forEach(item => {
+        const savedVal = localStorage.getItem('stock_' + item.name) || 50;
+        grid.innerHTML += `<div class="stock-item">
+            <label>${item.name} (${item.type})</label>
+            <input type="number" id="input_${item.name}" value="${savedVal}" oninput="calculate()">
+        </div>`;
+    });
+
+    function calculate() {
+        const day = document.getElementById('daySelect').value;
+        const count = parseFloat(document.getElementById('childCount').value) || 0;
+        const tbody = document.getElementById('resultBody');
+        tbody.innerHTML = "";
+
+        menu[day].forEach(mItem => {
+            const master = items.find(i => i.name === mItem.n);
+            const opening = parseFloat(document.getElementById('input_' + mItem.n).value) || 0;
+            
+            let consumption = (master.type === "KG") ? (count * mItem.q / 1000) : (count * mItem.q);
+            let closing = opening - consumption;
+            
+            const row = `<tr class="${closing < 0 ? 'low-stock' : ''}">
+                <td>${mItem.n}</td>
+                <td>${mItem.q} ${master.type === "KG" ? 'gm' : 'Unit'}</td>
+                <td>${consumption.toFixed(3)} ${master.type}</td>
+                <td>${opening.toFixed(3)} ${master.type}</td>
+                <td>${closing.toFixed(3)} ${master.type}</td>
+            </tr>`;
+            tbody.innerHTML += row;
+        });
+    }
+
+    function saveStock() {
+        items.forEach(item => {
+            const val = document.getElementById('input_' + item.name).value;
+            localStorage.setItem('stock_' + item.name, val);
+        });
+        alert("स्टॉक सफलतापूर्वक सेव कर लिया गया है!");
+    }
+
+    // शुरुआती लोड
+    calculate();
+</script>
+</div>
 <script>
     // 1. Navigation Logic
     function showPage(pageId, isLocked = false) {
