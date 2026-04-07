@@ -228,179 +228,57 @@
 </div>
 <<!-- PAGE 9: LINKS -->
 <div id="p9" class="page">
-<title>पोषाहार डिजिटल रजिस्टर 2026</title>
-    <style>
-        :root { --primary: #1a2a6c; --secondary: #b21f1f; --accent: #fdbb2d; --bg: #f8f9fa; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 15px; font-size: 14px; }
-        .container { max-width: 1100px; margin: auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        h2 { text-align: center; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; border-bottom: 4px solid var(--accent); padding-bottom: 10px; }
-        
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; background: #fff8e1; padding: 15px; border-radius: 10px; border: 1px solid #ffe082; }
-        .stock-box label { display: block; font-weight: bold; margin-bottom: 4px; color: #5d4037; }
-        .stock-box input { width: 90%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; }
-
-        .control-panel { display: flex; flex-wrap: wrap; gap: 20px; background: #e3f2fd; padding: 20px; border-radius: 10px; margin: 20px 0; align-items: center; border: 1px solid #90caf9; }
-        .control-panel div { flex: 1; min-width: 150px; }
-        input, select { width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #999; box-sizing: border-box; }
-
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: white; }
-        th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
-        th { background: var(--primary); color: white; }
-        .low-stock { background: #ffcdd2; color: #b71c1c; font-weight: bold; }
-
-        .history-section { margin-top: 40px; border-top: 2px dashed #ccc; padding-top: 20px; }
-        .btn-group { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
-        button { padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; color: white; transition: 0.3s; }
-        .btn-save { background: #2e7d32; }
-        .btn-entry { background: #1565c0; }
-        .btn-clear { background: #c62828; }
-
-        @media print { .no-print { display: none; } }
-    </style>
+<style>
+    body { font-family: sans-serif; padding: 20px; background-color: #f4f4f9; }
+    form { max-width: 400px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    input, select { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;}
+    button { width: 100%; padding: 10px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+    button:hover { background: #218838; }
+    h2 { text-align: center; color: #333; }
+  </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>📅 पोषाहार स्मार्ट डिजिटल रजिस्टर</h2>
+  <form name="submit-to-google-sheet">
+    <h2>Birth Registration</h2>
+    
+    <label>Child's Full Name</label>
+    <input type="text" name="ChildName" placeholder="Ex: Arjun Kumar" required>
 
-    <div class="no-print">
-        <p><strong>Step 1:</strong> महीने का शुरुआती स्टॉक सेट करें और "स्टॉक अपडेट करें" दबाएं।</p>
-        <div class="grid" id="openingStock"></div>
-        <div class="btn-group"><button class="btn-save" onclick="updateMasterStock()">💾 स्टॉक अपडेट करें</button></div>
+    <label>Date of Birth</label>
+    <input type="date" name="DOB" required>
 
-        <p><strong>Step 2:</strong> दैनिक एंट्री दर्ज करें:</p>
-        <div class="control-panel">
-            <div><label>तारीख:</label><input type="date" id="entryDate"></div>
-            <div><label>दिन:</label>
-                <select id="entryDay" onchange="calculate()">
-                    <option value="MON">सोमवार</option><option value="TUE">मंगलवार</option>
-                    <option value="WED">बुधवार</option><option value="THU">गुरुवार</option>
-                    <option value="FRI">शुक्रवार</option><option value="SAT">शनिवार</option>
-                </select>
-            </div>
-            <div><label>बच्चों की संख्या:</label><input type="number" id="childCount" oninput="calculate()" placeholder="0"></div>
-        </div>
-    </div>
+    <label>Gender</label>
+    <select name="Gender" required>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+    </select>
 
-    <h3>आज का विवरण:</h3>
-    <table id="dailyTable">
-        <thead>
-            <tr><th>सामग्री</th><th>निर्धारित (gm)</th><th>खपत</th><th>शेष स्टॉक</th></tr>
-        </thead>
-        <tbody id="dailyBody"></tbody>
-    </table>
+    <label>Father's Name</label>
+    <input type="text" name="FatherName" placeholder="Father's Full Name" required>
 
-    <div class="btn-group no-print">
-        <button class="btn-entry" onclick="saveToHistory()">📝 आज की एंट्री रजिस्टर में जोड़ें</button>
-        <button onclick="window.print()" style="background:#546e7a">🖨️ प्रिंट निकालें</button>
-    </div>
+    <label>Mother's Name</label>
+    <input type="text" name="MotherName" placeholder="Mother's Full Name" required>
 
-    <div class="history-section no-print">
-        <h3>📜 पिछला रिकॉर्ड (History)</h3>
-        <table id="historyTable">
-            <thead>
-                <tr><th>तारीख</th><th>दिन</th><th>बच्चे</th><th>कुल खर्च सामग्री विवरण</th></tr>
-            </thead>
-            <tbody id="historyBody"></tbody>
-        </table>
-        <button class="btn-clear" style="margin-top:10px;" onclick="clearHistory()">🗑️ सारा डेटा साफ़ करें</button>
-    </div>
-</div>
+    <label>Place of Birth</label>
+    <input type="text" name="PlaceOfBirth" placeholder="City/Hospital Name" required>
 
-<script>
-    const items = ["चावल", "दाल", "तेल", "चना", "आलू", "हरी सब्जी", "सोयाबीन सब्जी", "पायज टमाटर", "गुड़", "मूंगफली", "कद्दू", "फल", "अंडा"];
-    const menu = {
-        "MON": [{n:"चावल",q:70}, {n:"चना",q:20}, {n:"हरी सब्जी",q:25}, {n:"तेल",q:5}, {n:"मूंगफली",q:15}],
-        "TUE": [{n:"आलू",q:60}, {n:"चना",q:20}, {n:"चावल",q:70}, {n:"फल",q:1}],
-        "WED": [{n:"चावल",q:60}, {n:"सोयाबीन सब्जी",q:20}, {n:"पायज टमाटर",q:25}, {n:"तेल",q:5}, {n:"गुड़",q:20}, {n:"अंडा",q:1}],
-        "THU": [{n:"चावल",q:60}, {n:"गुड़",q:30}, {n:"मूंगफली",q:15}, {n:"फल",q:1}],
-        "FRI": [{n:"चावल",q:70}, {n:"दाल",q:25}, {n:"कद्दू",q:100}, {n:"तेल",q:5}, {n:"अंडा",q:1}],
-        "SAT": [{n:"चावल",q:60}, {n:"दाल",q:20}, {n:"हरी सब्जी",q:25}, {n:"तेल",q:5}, {n:"फल",q:1}]
-    };
+    <button type="submit">Register Birth</button>
+  </form>
 
-    // Initialize inputs
-    const stockDiv = document.getElementById('openingStock');
-    items.forEach(i => {
-        let val = localStorage.getItem('master_'+i) || 0;
-        stockDiv.innerHTML += `<div class="stock-box"><label>${i}</label><input type="number" id="ms_${i}" value="${val}"></div>`;
+  <script>
+    const scriptURL = 'YOUR_WEB_APP_URL_HERE'; // <--- PASTE YOUR URL HERE
+    const form = document.forms['submit-to-google-sheet'];
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => alert("Thank You! Registration Data Submitted Successfully."))
+        .then(() => { window.location.reload(); })
+        .catch(error => console.error('Error!', error.message));
     });
-
-    // Set today's date
-    document.getElementById('entryDate').valueAsDate = new Date();
-
-    function calculate() {
-        const day = document.getElementById('entryDay').value;
-        const count = parseFloat(document.getElementById('childCount').value) || 0;
-        const tbody = document.getElementById('dailyBody');
-        tbody.innerHTML = "";
-
-        menu[day].forEach(m => {
-            let open = parseFloat(localStorage.getItem('master_'+m.n)) || 0;
-            let consume = (m.n === "फल" || m.n === "अंडा") ? (count * m.q) : (count * m.q / 1000);
-            let unit = (m.n === "फल" || m.n === "अंडा") ? "Unit" : "KG";
-            let closing = open - consume;
-
-            tbody.innerHTML += `<tr class="${closing < 0 ? 'low-stock' : ''}">
-                <td>${m.n}</td><td>${m.q}</td>
-                <td>${consume.toFixed(3)} ${unit}</td>
-                <td>${closing.toFixed(3)} ${unit}</td>
-            </tr>`;
-        });
-    }
-
-    function updateMasterStock() {
-        items.forEach(i => {
-            let val = document.getElementById('ms_'+i).value;
-            localStorage.setItem('master_'+i, val);
-        });
-        alert("मास्टर स्टॉक अपडेट हो गया!");
-        calculate();
-    }
-
-    function saveToHistory() {
-        const date = document.getElementById('entryDate').value;
-        const day = document.getElementById('entryDay').options[document.getElementById('entryDay').selectedIndex].text;
-        const count = document.getElementById('childCount').value;
-        if(!count || count <= 0) { alert("बच्चों की संख्या डालें!"); return; }
-
-        let summary = [];
-        const currentMenu = menu[document.getElementById('entryDay').value];
-        
-        currentMenu.forEach(m => {
-            let open = parseFloat(localStorage.getItem('master_'+m.n)) || 0;
-            let consume = (m.n === "फल" || m.n === "अंडा") ? (count * m.q) : (count * m.q / 1000);
-            summary.push(`${m.n}: ${consume.toFixed(2)}`);
-            localStorage.setItem('master_'+m.n, (open - consume).toFixed(3));
-            document.getElementById('ms_'+m.n).value = (open - consume).toFixed(3);
-        });
-
-        let logs = JSON.parse(localStorage.getItem('posahar_logs') || "[]");
-        logs.push({ date, day, count, details: summary.join(", ") });
-        localStorage.setItem('posahar_logs', JSON.stringify(logs));
-        
-        renderHistory();
-        calculate();
-        alert("डाटा रजिस्टर में सेव कर दिया गया है!");
-    }
-
-    function renderHistory() {
-        let logs = JSON.parse(localStorage.getItem('posahar_logs') || "[]");
-        const hBody = document.getElementById('historyBody');
-        hBody.innerHTML = logs.reverse().map(l => `<tr>
-            <td>${l.date}</td><td>${l.day}</td><td>${l.count}</td><td>${l.details}</td>
-        </tr>`).join("");
-    }
-
-    function clearHistory() {
-        if(confirm("क्या आप सारा पुराना रिकॉर्ड और स्टॉक डिलीट करना चाहते हैं?")) {
-            localStorage.clear();
-            location.reload();
-        }
-    }
-
-    renderHistory();
-    calculate();
-</script>
+  </script>
 
 <script>
     // 1. Navigation Logic
@@ -506,6 +384,7 @@
         reader.readAsArrayBuffer(file);
     });
 </script>
+
 <footer class="main-footer">
     <div class="footer-content">
         <Center><p>&copy; 2024 **ICDS धनरूआ (पटना)** | सर्वाधिकार सुरक्षित</p>
@@ -513,6 +392,5 @@
         <p>Copyright: <strong>virajkumar63</strong></p></Center>
     </div>
 </footer>
-
 </body>
 </html>
