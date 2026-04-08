@@ -14,9 +14,32 @@
         button { width: 100%; padding: 15px; background: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 18px; margin-top: 30px; transition: 0.3s; }
         button:hover { background: #219150; }
     </style>
+	<style>
+    .top-right-btn {
+        position: absolute;
+        top: 15px;      /* Distance from top */
+        right: 15px;    /* Distance from right */
+	left: 50px;
+        padding: 10px 15px;
+        background-color: #e74c3c; /* Red color to stand out */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        z-index: 1000;  /* Keeps it on top of other elements */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .top-right-btn:hover {
+        background-color: #c0392b;
+    }
+</style>
 </head>
 <body>
-
+<button class="top-right-btn" onclick="window.location.href='index.html'">
+    Back To Home
+</button>
 <div class="form-card">
     <h2>आँगनबाड़ी केंद्र सर्वे डाटा एंट्री</h2>
     <form name="survey-form">
