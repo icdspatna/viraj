@@ -35,10 +35,31 @@
     overflow: hidden;
     padding: 10px 0;
 }
+#lockScreen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(44, 62, 80, 0.98); z-index: 10000; 
+            display: flex; justify-content: center; align-items: center;
+        }
+        .lock-box { background: white; padding: 40px; border-radius: 12px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 300px; }
+        .lock-box h3 { margin-top: 0; color: #2c3e50; }
+        .lock-box input { width: 100%; margin-bottom: 15px; box-sizing: border-box; }
+        .lock-box button { width: 100%; background: #27ae60; }
 
     </style>
 </head>
 <body>
+<div id="lockScreen">
+    <div class="lock-box">
+        <div style="font-size: 40px;">🔒</div>
+        <h3>Admin Login</h3>
+        <input type="password" id="passInput" placeholder="Enter Admin Password">
+        <button onclick="checkPassword()">Login</button>
+        <p id="err" style="color:red; display:none; font-size:14px; margin-top:10px;">Invalid Password!</p>
+    </div>
+</div>
+
+    
+    
 <div class="header-actions">
     <button class="top-right-btn" onclick="window.location.href='index.html'">
         Back To Home
@@ -90,7 +111,36 @@
             </tbody>
     </table>
 </div>
+<script>
+    const SECRET = "Admin@123"; // <--- Set your password here
+    const scriptURL = 'YOUR_APPS_SCRIPT_URL_HERE'; // <--- Paste your URL here
 
+    function checkPassword() {
+        const input = document.getElementById('passInput').value;
+        if (input === SECRET) {
+            document.getElementById('lockScreen').style.display = 'none';
+            alert("Login Success!");
+        } else {
+            document.getElementById('err').style.display = 'block';
+        }
+    }
+ // Handle Form Submit
+    document.getElementById('orderForm').addEventListener('submit', e => {
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        btn.innerText = "Saving...";
+        btn.disabled = true;
+
+        fetch(scriptURL, { method: 'POST', body: new FormData(e.target)})
+            .then(res => {
+                alert("Data Saved Successfully!");
+                e.target.reset();
+                btn.innerText = "डाटा सुरक्षित करें";
+                btn.disabled = false;
+            })
+            .catch(err => alert("Error: " + err.message));
+    });
+</script>
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzzpViyVdv8hjqlUeZ4PCKWmlQdChgehuOvvBvmooTUn6ATJM9GznzCvuAmX-cp5mcv/exec';
 
