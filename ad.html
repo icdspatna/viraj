@@ -15,12 +15,36 @@
         td { border: 1px solid #ddd; padding: 10px; text-align: center; font-size: 14px; }
         tr:nth-child(even) { background: #f9f9f9; }
         #searchInput { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; margin-bottom: 15px; box-sizing: border-box; }
+
+.top-right-btn {
+    float: right;
+    background: #e74c3c;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+/* कंटेनर के ऊपर बटन को सही जगह रखने के लिए */
+.header-actions {
+    max-width: 900px;
+    margin: auto;
+    overflow: hidden;
+    padding: 10px 0;
+}
+
     </style>
 </head>
 <body>
-<button class="top-right-btn" onclick="window.location.href='index.html'">
-    Back To Home
-</button>
+<div class="header-actions">
+    <button class="top-right-btn" onclick="window.location.href='index.html'">
+        Back To Home
+    </button>
+</div>
+
 <div class="container">
     <h2>🔒 कार्यालय से निर्गत पत्र / आदेश (ADMIN ONLY)</h2>
     
@@ -68,7 +92,7 @@
 </div>
 
 <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyTtEQB-h_BKBlj04_7_o4W2veYxFb5dzeHC2jqKXegpecqWNiLk1z0yONXZqM2FHvm/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzzpViyVdv8hjqlUeZ4PCKWmlQdChgehuOvvBvmooTUn6ATJM9GznzCvuAmX-cp5mcv/exec';
 
     // डाटा लोड करने का फंक्शन
     function loadData() {
