@@ -168,6 +168,21 @@
 
     // पेज लोड होते ही डाटा दिखाएँ
     window.onload = loadData;
+
+    <script>
+    // 1. Navigation Logic
+    function showPage(pageId, isLocked = false) {
+        if(isLocked) {
+            let pw = prompt("पासवर्ड दर्ज करें:");
+            if(pw !== "icds123") { // DEFAULT PASSWORD
+                alert("गलत पासवर्ड!");
+                return;
+            }
+        }
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+    }
+    </script>
 </script>
 
 </body>
