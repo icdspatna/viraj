@@ -623,7 +623,31 @@
         </table>
     </div>
 </section>
+<script>
 
+function updateSiteHits() {
+    // यहाँ अपनी Google Script वाली URL डालें
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxSwnDPMIv2hmqubaiCe6ZnnKqNfg23WdBq_lVuSuavoAhHYUXGiCK018r0Bzpvkqb68w/exec";
+
+    fetch(scriptURL)
+        .then(response => response.text())
+        .then(hits => {
+            document.getElementById('hit_counter_value').innerText = hits;
+        })
+        .catch(error => {
+            console.error('Error fetching hits:', error);
+            document.getElementById('hit_counter_value').innerText = "N/A";
+        });
+}
+
+// पेज लोड होते ही काउंटर अपडेट करें
+window.addEventListener('load', () => {
+    updateSiteHits(); 
+    generateVoucher(); // आपका पुराना फंक्शन
+});
+
+
+</script>
 <!-- Clear float to prevent alignment issues -->
 <div style="clear: both;"></div>
 
@@ -636,8 +660,11 @@
 
 
 
+
 <footer class="main-footer">
-	<center>  कुल विजिटर्स: <span id="visit-count">509</span> </center>
+	<center>  <div style="background: #34495e; color: white; padding: 5px 15px; border-radius: 20px; display: inline-block; font-size: 12px; margin-top: 10px;">
+    साइट विज़िटर संख्या: <span id="hit_counter_value">लोड हो रहा है...</span>
+</div> </center>
     <div> <Center> Design & Develop &copy;By Er.Viraj Kumar </Center></div>
     <div style="margin-top: 10px;">
        
