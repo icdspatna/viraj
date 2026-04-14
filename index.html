@@ -891,6 +891,28 @@
   
 
 <script>
+
+	// 1. IMPROVED VISITOR COUNTER
+    function updateCounter() {
+        // Get the current count from local storage
+        let count = localStorage.getItem('visit_count');
+        
+        // If it's the first time ever, set to 1, else add 1
+        if (count === null) {
+            count = 1;
+        } else {
+            count = parseInt(count) + 1;
+        }
+        
+        // Save the new number back to storage
+        localStorage.setItem('visit_count', count);
+        
+        // Display it on the screen
+        const countDisplay = document.getElementById('visit-count');
+        if(countDisplay) {
+            countDisplay.innerText = count;
+        }
+    }
     // 1. Navigation Logic
     function showPage(pageId, isLocked = false) {
         if(isLocked) {
