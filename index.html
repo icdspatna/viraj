@@ -92,6 +92,557 @@
             </marquee>
         </aside>
     </div>
+
+<!-- Daily Menu Chart Section -->
+<section class="menu-section" style="padding: 40px 15px; font-family: 'Arial', sans-serif;">
+    <div style="max-width: 900px; margin: 0 auto; background: #fff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden;">
+        <h2 style="background-color: #2c3e50; color: #ffffff; margin: 0; padding: 20px; text-align: center; font-size: 24px;">Daily Menu Chart (दैनिक आहार तालिका)</h2>
+        
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; min-width: 600px;">
+                <thead>
+                    <tr style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+                        <th style="padding: 15px; text-align: left; color: #495057;">दिन (Day)</th>
+                        <th style="padding: 15px; text-align: left; color: #495057;">नाश्ता (Breakfast)</th>
+                        <th style="padding: 15px; text-align: left; color: #495057;">गर्म पका भोजन (Hot Cooked Meal)</th>
+                    </tr>
+                </thead>
+                <tbody style="color: #333;">
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 12px 15px; font-weight: bold;">सोमवार</td>
+                        <td style="padding: 12px 15px;">भूना चना और मूंगफली</td>
+                        <td style="padding: 12px 15px;">चावल का पुलाव</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee; background-color: #fdfdfd;">
+                        <td style="padding: 12px 15px; font-weight: bold;">मंगलवार</td>
+                        <td style="padding: 12px 15px;">केला, पपीता या मौसमी फल <br><span style="color: #666; font-size: 0.9em;">+ (दूध)</span></td>
+                        <td style="padding: 12px 15px;">आलू चना सब्जी, चावल</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 12px 15px; font-weight: bold;">बुधवार</td>
+                        <td style="padding: 12px 15px;">अंकुरित चना और गुड़ <br><span style="color: #666; font-size: 0.9em;">+ (अंडा)</span></td>
+                        <td style="padding: 12px 15px;">सोयाबीन सब्जी, चावल</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee; background-color: #fdfdfd;">
+                        <td style="padding: 12px 15px; font-weight: bold;">गुरुवार</td>
+                        <td style="padding: 12px 15px;">मौसमी फल <br><span style="color: #666; font-size: 0.9em;">+ (दूध)</span></td>
+                        <td style="padding: 12px 15px;">रसियाव</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 12px 15px; font-weight: bold;">शुक्रवार</td>
+                        <td style="padding: 12px 15px;">मौसमी फल <br><span style="color: #666; font-size: 0.9em;">+ (अंडा)</span></td>
+                        <td style="padding: 12px 15px;">कद्दू दाल, चावल / साग दाल, चावल</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px 15px; font-weight: bold;">शनिवार</td>
+                        <td style="padding: 12px 15px;">मौसमी फल</td>
+                        <td style="padding: 12px 15px;">खिचड़ी</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+<!-- Beneficiary Data Table -->
+<section class="data-table-section" style="padding: 40px 15px; font-family: 'Arial', sans-serif;">
+    <div style="max-width: 1000px; margin: 0 auto; background: #fff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden;">
+        <h2 style="background-color: #f1c40f; color: #333; margin: 0; padding: 15px; text-align: center; font-size: 22px; font-weight: bold;">गर्भवती एवं धात्री के लिए (For Pregnant & Lactating Mothers)</h2>
+        
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; text-align: center; min-width: 800px;">
+                <thead>
+                    <tr style="background-color: #edbb99; border-bottom: 2px solid #333;">
+                        <th style="padding: 10px; border: 1px solid #333;">क्र.</th>
+                        <th style="padding: 10px; border: 1px solid #333;">सामाग्री (Items)</th>
+                        <th style="padding: 10px; border: 1px solid #333;">सामाग्री की मात्र (ग्राम में)</th>
+                        <th style="padding: 10px; border: 1px solid #333;">दर / किलो</th>
+                        <th style="padding: 10px; border: 1px solid #333;">खर्च ग्राम</th>
+                        <th style="padding: 10px; border: 1px solid #333;">लाभार्थी की संख्या</th>
+                        <th style="padding: 10px; border: 1px solid #333;">खर्च राशि</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #333;">1</td>
+                        <td style="padding: 10px; border: 1px solid #333;">चावल</td>
+                        <td style="padding: 10px; border: 1px solid #333;">90</td>
+                        <td style="padding: 10px; border: 1px solid #333;">26</td>
+                        <td style="padding: 10px; border: 1px solid #333;">36000</td>
+                        <td rowspan="6" style="padding: 10px; border: 1px solid #333; font-size: 1.5em; font-weight: bold; background-color: #f9f9f9;">16</td>
+                        <td style="padding: 10px; border: 1px solid #333;">936</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #333;">2</td>
+                        <td style="padding: 10px; border: 1px solid #333;">मूंगदाल</td>
+                        <td style="padding: 10px; border: 1px solid #333;">40</td>
+                        <td style="padding: 10px; border: 1px solid #333;">80</td>
+                        <td style="padding: 10px; border: 1px solid #333;">16000</td>
+                        <td style="padding: 10px; border: 1px solid #333;">1280</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #333;">3</td>
+                        <td style="padding: 10px; border: 1px solid #333;">मसाला मिक्स</td>
+                        <td style="padding: 10px; border: 1px solid #333;">0.5</td>
+                        <td style="padding: 10px; border: 1px solid #333;">242</td>
+                        <td style="padding: 10px; border: 1px solid #333;">200</td>
+                        <td style="padding: 10px; border: 1px solid #333;">48.4</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #333;">4</td>
+                        <td style="padding: 10px; border: 1px solid #333;">सोयाबीन</td>
+                        <td style="padding: 10px; border: 1px solid #333;">15</td>
+                        <td style="padding: 10px; border: 1px solid #333;">90</td>
+                        <td style="padding: 10px; border: 1px solid #333;">6000</td>
+                        <td style="padding: 10px; border: 1px solid #333;">540</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #333;">5</td>
+                        <td style="padding: 10px; border: 1px solid #333;">नमक</td>
+                        <td style="padding: 10px; border: 1px solid #333;">2.5</td>
+                        <td style="padding: 10px; border: 1px solid #333;">20</td>
+                        <td style="padding: 10px; border: 1px solid #333;">1000</td>
+                        <td style="padding: 10px; border: 1px solid #333;">20</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #333;">6</td>
+                        <td style="padding: 10px; border: 1px solid #333;">सोयाबीन तेल</td>
+                        <td style="padding: 10px; border: 1px solid #333;">15</td>
+                        <td style="padding: 10px; border: 1px solid #333;">110</td>
+                        <td style="padding: 10px; border: 1px solid #333;">6000</td>
+                        <td style="padding: 10px; border: 1px solid #333;">660</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Updated Malnourished Children Data Table (Beneficiary Count: 40) -->
+<section class="data-table-section" style="padding: 40px 15px; font-family: 'Arial', sans-serif;">
+    <div style="max-width: 1000px; margin: 0 auto; background: #fff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden;">
+        <h2 style="background-color: #ffff00; color: #333; margin: 0; padding: 15px; text-align: center; font-size: 22px; font-weight: bold;">06 माह से 03 वर्ष के सामान्य कुपोषित के लिए</h2>
+        
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; text-align: center; min-width: 800px;">
+                <thead>
+                    <tr style="background-color: #f5b041; border-bottom: 2px solid #333;">
+                        <th style="padding: 10px; border: 1px solid #333;">क्र.</th>
+                        <th style="padding: 10px; border: 1px solid #333;">सामाग्री</th>
+                        <th style="padding: 10px; border: 1px solid #333;">सामाग्री की मात्र (ग्राम में)</th>
+                        <th style="padding: 10px; border: 1px solid #333;">दर / किलो</th>
+                        <th style="padding: 10px; border: 1px solid #333;">खर्च ग्राम</th>
+                        <th style="padding: 10px; border: 1px solid #333;">लाभार्थी की संख्या</th>
+                        <th style="padding: 10px; border: 1px solid #333;">खर्च राशि</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #333;">1</td>
+                        <td style="padding: 10px; border: 1px solid #333;">चावल</td>
+                        <td style="padding: 10px; border: 1px solid #333;">75</td>
+                        <td style="padding: 10px; border: 1px solid #333;">26</td>
+                        <td style="padding: 10px; border: 1px solid #333;">75000</td>
+                        <td rowspan="6" style="padding: 10px; border: 1px solid #333; font-size: 1.5em; font-weight: bold; background-color: #ffffff;">40</td>
+                        <td style="padding: 10px; border: 1px solid #333;">1950</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #333;">2</td>
+                        <td style="padding: 10px; border: 1px solid #333;">मूंगदाल</td>
+                        <td style="padding: 10px; border: 1px solid #333;">30</td>
+                        <td style="padding: 10px; border: 1px solid #333;">80</td>
+                        <td style="padding: 10px; border: 1px solid #333;">30000</td>
+                        <td style="padding: 10px; border: 1px solid #333;">2400</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #333;">3</td>
+                        <td style="padding: 10px; border: 1px solid #333;">मसाला मिक्स</td>
+                        <td style="padding: 10px; border: 1px solid #333;">0.5</td>
+                        <td style="padding: 10px; border: 1px solid #333;">242</td>
+                        <td style="padding: 10px; border: 1px solid #333;">500</td>
+                        <td style="padding: 10px; border: 1px solid #333;">121</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #333;">4</td>
+                        <td style="padding: 10px; border: 1px solid #333;">सोयाबीन</td>
+                        <td style="padding: 10px; border: 1px solid #333;">20</td>
+                        <td style="padding: 10px; border: 1px solid #333;">90</td>
+                        <td style="padding: 10px; border: 1px solid #333;">20000</td>
+                        <td style="padding: 10px; border: 1px solid #333;">1800</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #333;">5</td>
+                        <td style="padding: 10px; border: 1px solid #333;">नमक</td>
+                        <td style="padding: 10px; border: 1px solid #333;">2</td>
+                        <td style="padding: 10px; border: 1px solid #333;">20</td>
+                        <td style="padding: 10px; border: 1px solid #333;">2000</td>
+                        <td style="padding: 10px; border: 1px solid #333;">40</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #333;">6</td>
+                        <td style="padding: 10px; border: 1px solid #333;">सोयाबीन तेल</td>
+                        <td style="padding: 10px; border: 1px solid #333;">10</td>
+                        <td style="padding: 10px; border: 1px solid #333;">110</td>
+                        <td style="padding: 10px; border: 1px solid #333;">10000</td>
+                        <td style="padding: 10px; border: 1px solid #333;">1100</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<!-- Severely Malnourished Children Data Table -->
+<section class="data-table-section" style="padding: 40px 15px; font-family: 'Arial', sans-serif;">
+    <div style="max-width: 1000px; margin: 0 auto; background: #fff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden;">
+        <h2 style="background-color: #ffff00; color: #333; margin: 0; padding: 15px; text-align: center; font-size: 22px; font-weight: bold;">06 माह से 03 वर्ष के <span style="color: #ff0000;">अतिकुपोषित</span> के लिए</h2>
+        
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; text-align: center; min-width: 800px;">
+                <thead>
+                    <tr style="background-color: #f5b041; border-bottom: 2px solid #333;">
+                        <th style="padding: 10px; border: 1px solid #333;">क्र.</th>
+                        <th style="padding: 10px; border: 1px solid #333;">सामाग्री</th>
+                        <th style="padding: 10px; border: 1px solid #333;">सामाग्री का मात्र (ग्राम में)</th>
+                        <th style="padding: 10px; border: 1px solid #333;">दर / किलो</th>
+                        <th style="padding: 10px; border: 1px solid #333;">खर्च ग्राम</th>
+                        <th style="padding: 10px; border: 1px solid #333;">लाभार्थी की संख्या</th>
+                        <th style="padding: 10px; border: 1px solid #333;">खर्च राशि</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #333;">1</td>
+                        <td style="padding: 10px; border: 1px solid #333;">चावल</td>
+                        <td style="padding: 10px; border: 1px solid #333;">117.7</td>
+                        <td style="padding: 10px; border: 1px solid #333;">26</td>
+                        <td style="padding: 10px; border: 1px solid #333;">2942.5</td>
+                        <td rowspan="6" style="padding: 10px; border: 1px solid #333; font-size: 1.5em; font-weight: bold; background-color: #ffffff;">1</td>
+                        <td style="padding: 10px; border: 1px solid #333;">76.505</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #333;">2</td>
+                        <td style="padding: 10px; border: 1px solid #333;">मूंगदाल</td>
+                        <td style="padding: 10px; border: 1px solid #333;">53.5</td>
+                        <td style="padding: 10px; border: 1px solid #333;">80</td>
+                        <td style="padding: 10px; border: 1px solid #333;">1337.5</td>
+                        <td style="padding: 10px; border: 1px solid #333;">107</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #333;">3</td>
+                        <td style="padding: 10px; border: 1px solid #333;">मसाला मिक्स</td>
+                        <td style="padding: 10px; border: 1px solid #333;">1</td>
+                        <td style="padding: 10px; border: 1px solid #333;">242</td>
+                        <td style="padding: 10px; border: 1px solid #333;">25</td>
+                        <td style="padding: 10px; border: 1px solid #333;">6.05</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #333;">4</td>
+                        <td style="padding: 10px; border: 1px solid #333;">सोयाबीन</td>
+                        <td style="padding: 10px; border: 1px solid #333;">20</td>
+                        <td style="padding: 10px; border: 1px solid #333;">90</td>
+                        <td style="padding: 10px; border: 1px solid #333;">500</td>
+                        <td style="padding: 10px; border: 1px solid #333;">45</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #333;">5</td>
+                        <td style="padding: 10px; border: 1px solid #333;">नमक</td>
+                        <td style="padding: 10px; border: 1px solid #333;">3</td>
+                        <td style="padding: 10px; border: 1px solid #333;">20</td>
+                        <td style="padding: 10px; border: 1px solid #333;">75</td>
+                        <td style="padding: 10px; border: 1px solid #333;">1.5</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #333;">6</td>
+                        <td style="padding: 10px; border: 1px solid #333;">सोयाबीन तेल</td>
+                        <td style="padding: 10px; border: 1px solid #333;">20</td>
+                        <td style="padding: 10px; border: 1px solid #333;">110</td>
+                        <td style="padding: 10px; border: 1px solid #333;">500</td>
+                        <td style="padding: 10px; border: 1px solid #333;">55</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+<!-- Detailed Daily Menu with Quantities -->
+<section class="detailed-menu-section" style="padding: 40px 15px; font-family: 'Arial', sans-serif;">
+    <div style="max-width: 600px; margin: 0 auto; background: #fff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden; border: 1px solid #333;">
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; text-align: center;">
+                <thead>
+                    <tr style="background-color: #d1d1d1; border-bottom: 2px solid #333;">
+                        <th style="padding: 10px; border: 1px solid #333; width: 30%;">दिन (Day)</th>
+                        <th style="padding: 10px; border: 1px solid #333; width: 40%;">सामाग्री का नाम</th>
+                        <th style="padding: 10px; border: 1px solid #333; width: 30%;">QUANTITY in gm</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Monday -->
+                    <tr>
+                        <td rowspan="6" style="background-color: #cc0000; color: #fff; font-weight: bold; border: 1px solid #333;">MONDAY</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">चावल</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">70</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">चना</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">20</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">हरी सब्जी</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">25</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">तेल</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">5</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">चना</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">20</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">मूँगफली</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">15</td>
+                    </tr>
+
+                    <!-- Tuesday -->
+                    <tr>
+                        <td rowspan="4" style="background-color: #ffcc00; font-weight: bold; border: 1px solid #333;">TUESDAY</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">आलू</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">60</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">चना</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">25</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">चावल</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">70</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #c4a2e9;">फल</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #c4a2e9;">1</td>
+                    </tr>
+
+                    <!-- Wednesday -->
+                    <tr>
+                        <td rowspan="7" style="background-color: #99cc33; font-weight: bold; border: 1px solid #333;">WEDNESDAY</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #f9cb9c;">चावल</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #f9cb9c;">60</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #f9cb9c;">सोयाबीन सब्जी</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #f9cb9c;">20</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #f9cb9c;">पायज टमाटर</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #f9cb9c;">25</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #f9cb9c;">तेल</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #f9cb9c;">5</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #f9cb9c;">चना</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #f9cb9c;">25</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #f9cb9c;">गुड</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #f9cb9c;">20</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #f9cb9c;">अंडा</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #f9cb9c;">1</td>
+                    </tr>
+
+                    <!-- Thursday -->
+                    <tr>
+                        <td rowspan="4" style="background-color: #00ccff; font-weight: bold; border: 1px solid #333;">THURSDAY</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #d9ead3;">चावल</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #d9ead3;">60</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #d9ead3;">गुड</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #d9ead3;">30</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #d9ead3;">मूँगफली</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #d9ead3;">15</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">फल</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">1</td>
+                    </tr>
+
+                    <!-- Friday -->
+                    <tr>
+                        <td rowspan="6" style="background-color: #e06666; font-weight: bold; border: 1px solid #333;">FRIDAY</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">चावल</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">70</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">दाल</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">25</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">कद्दू</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">100</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">तेल</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">5</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #00b050; color: #fff;">दुग्ध</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #00b050; color: #fff;">0</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #f4cccc;">अंडा</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #f4cccc;">1</td>
+                    </tr>
+
+                    <!-- Saturday -->
+                    <tr>
+                        <td rowspan="5" style="background-color: #b6d7a8; font-weight: bold; border: 1px solid #333;">SATURDAY</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">चावल</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">60</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">दाल</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">20</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">हरी सब्जी</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">25</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">तेल</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">5</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">फल</td>
+                        <td style="padding: 8px; border: 1px solid #333; background-color: #a2c4e9;">2</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+<!-- Public Holiday List Table (Left Side) -->
+<section style="padding: 20px; float: left; width: 45%; font-family: 'Arial', sans-serif;">
+    <div style="background: #fff; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow: hidden; border: 1px solid #ddd;">
+        <h2 style="background-color: #d35400; color: #fff; margin: 0; padding: 15px; text-align: center; font-size: 20px;">सार्वजनिक अवकाश तालिका 2026</h2>
+        
+        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
+            <thead>
+                <tr style="background-color: #f2f2f2; border-bottom: 2px solid #333;">
+                    <th style="padding: 10px; border: 1px solid #ddd;">त्योहार/अवसर</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">तारीख</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">दिन</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;">गणतंत्र दिवस</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">26 जनवरी</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">सोमवार</td>
+                </tr>
+                <tr style="background-color: #fafafa;">
+                    <td style="padding: 8px; border: 1px solid #ddd;">होली</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">03-04 मार्च</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">मंगलबार-बुधवार</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;">ईद-उल-फितर</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">21 मार्च</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">शनिवार</td>
+                </tr>
+                <tr style="background-color: #fafafa;">
+                    <td style="padding: 8px; border: 1px solid #ddd;">बिहार दिवस</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">22 मार्च</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">रविवार</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;">रामनवमी</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">27 मार्च</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">शुक्रवार</td>
+                </tr>
+                <tr style="background-color: #fafafa;">
+                    <td style="padding: 8px; border: 1px solid #ddd;">अम्बेडकर जयंती</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">14 अप्रैल</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">मंगलवार</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;">ईदुज्जुहा (बकरीद)</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">28 मई</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">गुरुवार</td>
+                </tr>
+                <tr style="background-color: #fafafa;">
+                    <td style="padding: 8px; border: 1px solid #ddd;">स्वतंत्रता दिवस</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">15 अगस्त</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">शनिवार</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;">गांधी जयंती</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">02 अक्टूबर</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">शुक्रवार</td>
+                </tr>
+                <tr style="background-color: #fafafa;">
+                    <td style="padding: 8px; border: 1px solid #ddd;">विजयादशमी (दशहरा)</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">20 अक्टूबर</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">मंगलवार</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;">दीपावली</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">08 नवंबर</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">रविवार</td>
+                </tr>
+                <tr style="background-color: #fafafa;">
+                    <td style="padding: 8px; border: 1px solid #ddd;">छठ पूजा</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">15-16 नवंबर</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">रविवार-सोमवार</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;">क्रिसमस</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">25 दिसंबर</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">शुक्रवार</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- Clear float to prevent alignment issues -->
+<div style="clear: both;"></div>
+
+
+
+
+
+
+
+
+
+
+<footer class="main-footer">
+	<center>  कुल विजिटर्स: <span id="visit-count">0</span> </center>
+    <div> <Center> Design & Develop &copy;By Er.Viraj Kumar </Center></div>
+    <div style="margin-top: 10px;">
+       
+    </div>
+</footer>
 </div>
 
 <!-- PAGE 2: SERVICES -->
@@ -102,6 +653,111 @@
         <div class="card"><img src="icds4.png" width="100%"><h3>टीकाकरण</h3><p>नियमित टीकाकरण अभियान।</p></div>
         <div class="card"><img src="icds6.png" width="100%"><h3>स्वास्थ्य जाँच</h3><p>गर्भवती महिलाओं की देखभाल।</p></div>
     </div>
+
+<!-- PMMVY Yojana Details Section -->
+<div id="pmmvy-page" class="card" style="line-height: 1.6;">
+    <h2 style="background-color: #ff4500; color: white; padding: 15px; text-align: center; border-radius: 5px 5px 0 0; margin-top: 0;">
+        प्रधानमंत्री मातृ वंदना योजना (PMMVY) - बिहार
+    </h2>
+
+    <div style="padding: 10px;">
+        <p><strong>PMMVY</strong> एक केंद्र प्रायोजित योजना है, जिसे बिहार में समाज कल्याण विभाग (ICDS) के माध्यम से लागू किया गया है। इसका लक्ष्य गर्भवती महिलाओं को आर्थिक सहायता प्रदान करना है ताकि वे उचित पोषण और आराम प्राप्त कर सकें।</p>
+
+        <h3 style="color: #004a99; border-bottom: 2px solid #004a99;">योजना के लाभ (Financial Benefits)</h3>
+        <ul>
+            <li><strong>पहली संतान के लिए:</strong> ₹5,000 (दो किस्तों में)
+                <ul>
+                    <li>प्रथम किस्त: ₹3,000 (पंजीकरण एवं कम से कम एक ANC जांच के बाद)</li>
+                    <li>द्वितीय किस्त: ₹2,000 (बच्चे के जन्म पंजीकरण एवं टीकाकरण के बाद)</li>
+                </ul>
+            </li>
+            <li><strong>दूसरी संतान (यदि बेटी हो):</strong> ₹6,000 की एकमुश्त राशि दी जाती है।</li>
+        </ul>
+
+        <h3 style="color: #004a99; border-bottom: 2px solid #004a99;">पात्रता (Eligibility)</h3>
+        <table style="width: 100%; border-collapse: collapse;">
+            <tr style="background-color: #f2f2f2;">
+                <th style="padding: 8px; border: 1px solid #ddd;">विवरण</th>
+                <th style="padding: 8px; border: 1px solid #ddd;">शर्तें</th>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;">न्यूनतम आयु</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">19 वर्ष या उससे अधिक</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;">लाभार्थी श्रेणी</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">SC/ST, दिव्यांग, ई-श्रम कार्ड धारक, BPL राशन कार्ड धारक महिलाएं</td>
+            </tr>
+        </table>
+
+        <h3 style="color: #004a99; border-bottom: 2px solid #004a99;">आवश्यक दस्तावेज (Documents Required)</h3>
+        <div style="background: #fff3cd; padding: 15px; border-radius: 5px; border-left: 5px solid #ffc107;">
+            <ol>
+                <li>आधार कार्ड (अनिवार्य)</li>
+                <li>बैंक पासबुक (आधार से लिंक होना चाहिए)</li>
+                <li>MCP कार्ड (ममता कार्ड/टीकाकरण कार्ड)</li>
+                <li>बच्चे का जन्म प्रमाण पत्र (दूसरी किस्त के लिए)</li>
+                <li>मोबाइल नंबर</li>
+            </ol>
+        </div>
+
+        <h3 style="color: #004a99; border-bottom: 2px solid #004a99;">आवेदन कैसे करें?</h3>
+        <p>1. <strong>आंगनवाड़ी केंद्र:</strong> अपनी नजदीकी सेविका के पास जाकर फॉर्म भरें।<br>
+           2. <strong>ऑनलाइन पोर्टल:</strong> <a href="https://wcd.gov.in" target="_blank" style="color: #ff4500; font-weight: bold;">pmmvy.wcd.gov.in</a> पर स्वयं पंजीकरण करें।</p>
+    </div>
+</div>
+<!-- MKUY Yojana Details Section -->
+<div id="mkuy-page" class="card" style="line-height: 1.6;">
+    <h2 style="background-color: #004a99; color: white; padding: 15px; text-align: center; border-radius: 5px 5px 0 0; margin-top: 0;">
+        मुख्यमंत्री कन्या उत्थान योजना (MKUY) - बिहार
+    </h2>
+
+    <div style="padding: 10px;">
+        <p><strong>मुख्यमंत्री कन्या उत्थान योजना</strong> बिहार सरकार की एक महत्वाकांक्षी योजना है, जिसका उद्देश्य कन्या भ्रूण हत्या को रोकना, लिंग अनुपात में सुधार करना और लड़कियों को उच्च शिक्षा के लिए प्रोत्साहित करना है। इस योजना के तहत बेटी के जन्म से लेकर स्नातक (Graduation) पास करने तक विभिन्न चरणों में आर्थिक सहायता दी जाती है।</p>
+
+        <h3 style="color: #ff4500; border-bottom: 2px solid #ff4500;">प्रोत्साहन राशि का विवरण (Financial Benefits)</h3>
+        <p>इस योजना के तहत एक बेटी को कुल <strong>₹94,100</strong> तक की सहायता मिल सकती है:</p>
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+            <thead>
+                <tr style="background-color: #f8f9fa;">
+                    <th style="padding: 10px; border: 1px solid #ddd;">चरण (Stage)</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">राशि (Amount)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>जन्म के समय</td><td>₹2,000</td></tr>
+                <tr><td>1 वर्ष पूरा होने और आधार पंजीकरण पर</td><td>₹1,000</td></tr>
+                <tr><td>2 वर्ष पूरा होने और पूर्ण टीकाकरण पर</td><td>₹2,000</td></tr>
+                <tr><td>इंटरमीडिएट (12वीं) पास करने पर (अविवाहित)</td><td>₹25,000</td></tr>
+                <tr><td>स्नातक (Graduation) पास करने पर</td><td>₹50,000</td></tr>
+            </tbody>
+        </table>
+
+        <h3 style="color: #ff4500; border-bottom: 2px solid #ff4500;">पात्रता (Eligibility)</h3>
+        <ul>
+            <li>लाभार्थी बिहार का स्थाई निवासी होना चाहिए।</li>
+            <li>एक परिवार की अधिकतम <strong>दो बेटियों</strong> को ही इस योजना का लाभ मिल सकता है।</li>
+            <li>इंटरमीडिएट पास करने वाली छात्रा का <strong>अविवाहित</strong> होना अनिवार्य है।</li>
+            <li>स्नातक प्रोत्साहन राशि के लिए छात्रा का किसी भी मान्यता प्राप्त कॉलेज से स्नातक उत्तीर्ण होना आवश्यक है।</li>
+        </ul>
+
+        <h3 style="color: #ff4500; border-bottom: 2px solid #ff4500;">आवश्यक दस्तावेज (Required Documents)</h3>
+        <div style="background: #e7f3ff; padding: 15px; border-radius: 5px; border-left: 5px solid #004a99;">
+            <ol>
+                <li>छात्रा का आधार कार्ड</li>
+                <li>बैंक पासबुक (छात्रा के नाम पर और आधार से लिंक)</li>
+                <li>निवास प्रमाण पत्र</li>
+                <li>अंक प्रमाण पत्र (12वीं या स्नातक की मार्कशीट)</li>
+                <li>पासपोर्ट साइज फोटो और मोबाइल नंबर</li>
+            </ol>
+        </div>
+
+        <h3 style="color: #ff4500; border-bottom: 2px solid #ff4500;">आवेदन की प्रक्रिया (Application Process)</h3>
+        <p>1. <strong>जन्म/टीकाकरण लाभ:</strong> इसके लिए आवेदन अपने नजदीकी <strong>आंगनवाड़ी केंद्र</strong> या स्वास्थ्य केंद्र के माध्यम से करें।</p>
+        <p>2. <strong>शिक्षा प्रोत्साहन (12वीं/Graduation):</strong> इसके लिए बिहार सरकार के आधिकारिक पोर्टल <a href="https://medhasoft.bihar.gov.in/" target="_blank" style="color: #004a99; font-weight: bold;">Medhasoft (medhasoft.bihar.gov.in)</a> पर ऑनलाइन आवेदन करना होगा।</p>
+    </div>
+</div>
+
 </div>
 
 <!-- PAGE 3: ABOUT -->
