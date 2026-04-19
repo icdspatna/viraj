@@ -45,8 +45,37 @@
         .main-footer { background: #2c3e50; color: white; text-align: center; padding: 20px 0; }
 .social-icons a { color: white; font-size: 24px; margin: 0 10px; text-decoration: none; transition: 0.3s; }
 .social-icons a:hover { color: #27ae60; transform: scale(1.2); }
-    </style>
-    <link rel="stylesheet" href="https://cloudflare.com">
+   /* Base styles (Mobile First) */
+body {
+    font-size: 14px;
+}
+
+/* Laptop and Desktop View (Screens wider than 1024px) */
+@media screen and (min-width: 1025px) {
+    body {
+        font-size: 16px;
+        /* Desktop specific layout changes */
+    }
+}
+
+/* Tablet View (Screens between 769px and 1024px) */
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+    /* Adjust layout for small laptops or tablets */
+}
+
+/* Mobile View (Screens 768px and smaller) */
+@media screen and (max-width: 768px) {
+    /* Stack elements vertically for mobile */
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+```
+
+	 <link rel="stylesheet" href="https://cloudflare.com">
+	</style>
+   
 
 
 </head>
