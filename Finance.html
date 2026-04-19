@@ -184,9 +184,13 @@
     }
 
     function logout() {
-        sessionStorage.clear();
-        location.reload();
-    }
+    // 1. यूजर के लॉगिन सेशन को क्लियर करें
+    sessionStorage.clear();
+    
+    // 2. ऑटोमैटिक होम पेज पर रीडायरेक्ट करें
+    window.location.href = "https://icdspatna.github.io/viraj/index.html#";
+}
+
 
     async function sync() {
         document.getElementById('loader').style.display = 'block';
