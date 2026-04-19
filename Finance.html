@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <title>Office Project Finance Manager</title>
+    <script src="https://cloudflare.com"></script>
+    <script src="https://cloudflare.com"></script>
+    <script src="https://cloudflare.com"></script>
+    <style>
+        :root { --navy: #002147; --blue: #0056b3; --orange: #ff8c00; --light: #f4f7f6; --red: #d32f2f; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--light); margin: 0; padding: 20px; }
+        .container { max-width: 1500px; margin: auto; }
+        
+        /* Login Overlay */
+        #loginOverlay { position:fixed; top:0; left:0; width:100%; height:100%; background: var(--navy); display:flex; justify-content:center; align-items:center; z-index:9999; }
+        .login-box { background:white; padding:40px; border-radius:15px; text-align:center; width:350px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+
+        /* Header & Top Bar */
+        .top-bar { background: var(--navy); color: white; padding: 15px 25px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .logout-btn { background: var(--red); color:white; border:none; padding:8px 15px; border-radius:5px; cursor:pointer; font-weight:bold; }
+
+        /* Summary Cards */
+        .summary-row { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 20px; }
+        .total-card { min-width: 220px; background: white; border-top: 5px solid var(--blue); padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .total-card h5 { margin: 0; color: #666; font-size: 0.75em; }
+        .total-card p { margin: 5px 0 0; font-size: 1.2em; font-weight: bold; color: var(--navy); }
+
+        /* Grid */
+        .main-grid { display: grid; grid-template-columns: 350px 1fr; gap: 20px; margin-bottom: 30px; }
+        .card { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .bal-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #fffbf2; border-left: 4px solid var(--orange); margin-bottom: 8px; border-radius: 4px; }
+
+        /* Tabs */
+        .tabs { display: flex; gap: 5px; }
+        .tab-btn { padding: 12px 25px; border: none; background: #ddd; cursor: pointer; border-radius: 8px 8px 0 0; font-weight: bold; }
+        .tab-btn.active { background: white; border-top: 3px solid var(--blue); }
+        .tab-content { background: white; padding: 25px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: none; }
+        .tab-content.active { display: block; }
+        
+        /* Table */
+        table { width: 100%; border-collapse: collapse; font-size: 0.85em; }
+        th { background: #f8f9fa; padding: 12px; border-bottom: 2px solid #ddd; text-align: left; }
+        td { padding: 12px; border-bottom: 1px solid #eee; }
+
+        /* Footer */
+        .main-footer { background: var(--navy); color: white; padding: 20px; text-align: center; margin-top: 40px; border-radius: 10px; }
+        .developer-tag span { color: var(--orange); font-weight: bold; }
+
+        input, select, textarea { width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        .submit-btn { background: #28a745; color: white; border: none; padding: 12px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<!-- LOGIN OVERLAY -->
+<div id="loginOverlay">
+    <div class="login-box">
+        <h2 style="color:var(--navy)">Project Login</h2>
+        <p style="color:#666; font-size:0.85em;">प्रोजेक्ट कोड दर्ज करें</p>
+        <input type="password" id="sysPassword" placeholder="Enter Code">
+        <button onclick="checkPassword()" style="background:var(--orange); color:white; border:none; padding:12px; border-radius:5px; width:100%; cursor:pointer; font-weight:bold;">Access Dashboard</button>
+        <p id="loginError" style="color:red; display:none; font-size:0.8em; margin-top:10px;">गलत पासवर्ड!</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="top-bar">
+        <h2 style="margin:0">Finance Dashboard</h2>
+        <div style="display:flex; align-items:center; gap:15px;">
+            <select id="mainProject" disabled>
+                <option value="DHANRUA">DHANRUA</option>
+                <option value="BEGUSARAI GRAMIN">BEGUSARAI GRAMIN</option>
+                <option value="BAKHTIYARPUR">BAKHTIYARPUR</option>
+                <option value="BIKRAM">BIKRAM</option>
+                <option value="BAARH">BAARH</option>
+            </select>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <div id="loader" style="display:none; text-align:center; font-weight:bold; color:var(--blue);">🔄 Syncing Data...</div>
+
+    <!-- SUMMARY STRIP -->
+    <div id="totalStrip" class="summary-row"></div>
+
+    <div class="main-grid">
+        <div class="card">
+            <h3 style="margin-top:0">Remaining Balance</h3>
+            <div id="balanceList"></div>
+        </div>
+        <div class="card">
+            <h3 style="margin-top:0">Recent Bill Records</h3>
+            <div style="max-height:400px; overflow-y:auto;">
+                <table>
+                    <thead><tr><th>Bill No</th><th>Date</th><th>Head</th><th>Amount</th><th>Purpose</th></tr></thead>
+                    <tbody id="expBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showTab(event, 'allotTab')">Allotment Entry</button>
+        <button class="tab-btn" onclick="showTab(event, 'expTab')">Expenditure Entry</button>
+        <button class="tab-btn" onclick="showTab(event, 'reportTab')">Reports</button>
+    </div>
+
+    <div id="allotTab" class="tab-content active">
+        <form id="altForm">
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:15px;">
+                <div><label>Source</label><select id="altSrc"><option>HRMS</option><option>CFMS</option><option>SNA Sparsh</option><option>PFMS</option></select></div>
+                <div><label>Letter No</label><input type="number" id="altLet" required></div>
+                <div><label>Date</label><input type="date" id="altDat" required></div>
+                <div><label>Order No</label><input type="text" id="altOrd" maxlength="15" required></div>
+                <div><label>Head</label><select id="altHead" class="head-drop"></select></div>
+                <div><label>Unit</label><select id="altUnit" class="unit-drop"></select></div>
+                <div><label>Amount</label><input type="number" id="altAmt" step="0.01" required></div>
+            </div>
+            <button type="submit" class="submit-btn" style="margin-top:15px;">Save Allotment</button>
+        </form>
+    </div>
+
+    <div id="expTab" class="tab-content">
+        <form id="expForm">
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:15px;">
+                <div><label>Source</label><select id="expSrc"><option>HRMS</option><option>CFMS</option><option>SNA Sparsh</option><option>PFMS</option></select></div>
+                <div><label>Order No</label><input type="number" id="expOrd" required></div>
+                <div><label>Date</label><input type="date" id="expDat" required></div>
+                <div><label>Bill No</label><input type="text" id="expBill" required></div>
+                <div><label>Head</label><select id="expHead" class="head-drop"></select></div>
+                <div><label>Unit</label><select id="expUnit" class="unit-drop"></select></div>
+                <div><label>Amount</label><input type="number" id="expAmt" step="0.01" required></div>
+                <div><label>Purpose</label><input type="text" id="expPur"></div>
+            </div>
+            <button type="submit" class="submit-btn" style="margin-top:15px; background:var(--blue);">Record Bill</button>
+        </form>
+    </div>
+
+    <div id="reportTab" class="tab-content">
+        <button onclick="exportXLS()" style="background:#1d6f42; color:white; padding:10px; border:none; cursor:pointer; margin-bottom:10px;">Export Excel</button>
+        <table id="fullTable">
+            <thead><tr><th>S.No</th><th>Bill No</th><th>Date</th><th>Head</th><th>Amount</th><th>Purpose</th></tr></thead>
+            <tbody id="fullBody"></tbody>
+        </table>
+    </div>
+
+    <footer class="main-footer">
+        <p>© 2026 Office Finance System | All Rights Reserved</p>
+        <p class="developer-tag">Design and Developed by: <span>Er. Viraj Kumar</span></p>
+    </footer>
+</div>
+
+<script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxDPKR6J5Wuyw0ap8VQ6tzLCqA1gP-bMtbmi0o0Mz7R2yKwKN18u_yLO03tnhHf_Kn4iw/exec";
+    const heads = ["51-2235-02-102-0123", "51-2235-02-102-0222", "51-2235-02-102-0105", "51-2235-02-102-0122", "51-2235-02-102-0225", "51-2235-02-102-0322", "51-2235-02-102-0325", "51-2235-02-102-0327", "51-2236-02-101-0103", "51-2236-02-101-0203", "51-2236-02-101-0303", "51-2236-02-789-0204", "51-2236-02-789-0304"];
+    const units = ["01.01", "01.03", "01.04", "01.05", "01.06", "01.07", "02.01", "06.01", "11.01", "13.01", "13.10", "14.01", "16.01", "20.03", "21.01", "21.03", "26.01", "28.02", "52.01"];
+    
+    // प्रोजेक्ट पासवर्ड मैपिंग
+    const authMap = { "Welcome@1": "DHANRUA", "Welcome@2": "BEGUSARAI GRAMIN", "Welcome@3": "BAKHTIYARPUR", "Welcome@4": "BIKRAM", "Welcome@5": "BAARH" };
+    
+    let rawAlt = [], rawExp = [];
+
+    window.onload = async () => {
+        document.querySelectorAll('.head-drop').forEach(d => heads.forEach(h => d.add(new Option(h, h))));
+        document.querySelectorAll('.unit-drop').forEach(d => units.forEach(u => d.add(new Option(u, u))));
+        if (sessionStorage.getItem('authProj')) loginSuccess(sessionStorage.getItem('authProj'));
+    };
+
+    function checkPassword() {
+        const pass = document.getElementById('sysPassword').value;
+        if (authMap[pass]) {
+            loginSuccess(authMap[pass]);
+        } else {
+            document.getElementById('loginError').style.display = 'block';
+        }
+    }
+
+    async function loginSuccess(projName) {
+        sessionStorage.setItem('authProj', projName);
+        document.getElementById('loginOverlay').style.display = 'none';
+        document.getElementById('mainProject').value = projName;
+        await sync();
+    }
+
+    function logout() {
+        sessionStorage.clear();
+        location.reload();
+    }
+
+    async function sync() {
+        document.getElementById('loader').style.display = 'block';
+        try {
+            const res = await fetch(SCRIPT_URL);
+            const data = await res.json();
+            rawAlt = data.allotments.slice(1);
+            rawExp = data.expenditures.slice(1);
+            render();
+        } catch(e) { console.error(e); }
+        document.getElementById('loader').style.display = 'none';
+    }
+
+    function render() {
+        const proj = sessionStorage.getItem('authProj');
+        const alts = rawAlt.filter(r => r[0] === proj);
+        const exps = rawExp.filter(r => r[0] === proj);
+
+        let tHtml = '', bHtml = '';
+        heads.forEach(h => {
+            let tA = alts.filter(r => r[5] === h).reduce((s, r) => s + parseFloat(r[7] || 0), 0);
+            let tE = exps.filter(r => r[6] === h).reduce((s, r) => s + parseFloat(r[9] || 0), 0);
+            if(tA > 0) {
+                tHtml += `<div class="total-card"><h5>Total: ${h.split('-').pop()}</h5><p>₹${tA.toLocaleString()}</p></div>`;
+                bHtml += `<div class="bal-item"><span>${h}</span><strong>₹${(tA-tE).toLocaleString()}</strong></div>`;
+            }
+        });
+        document.getElementById('totalStrip').innerHTML = tHtml;
+        document.getElementById('balanceList').innerHTML = bHtml;
+
+        const row = r => `<tr><td>${r[4]}</td><td>${new Date(r[3]).toLocaleDateString()}</td><td>${r[6]}</td><td style="color:red; font-weight:bold;">₹${parseFloat(r[9]).toLocaleString()}</td><td>${r[10]||'-'}</td></tr>`;
+        document.getElementById('expBody').innerHTML = exps.map(row).reverse().join('');
+        document.getElementById('fullBody').innerHTML = exps.map((r,i)=>`<tr><td>${i+1}</td><td>${r[4]}</td><td>${new Date(r[3]).toLocaleDateString()}</td><td>${r[6]}</td><td>₹${r[9]}</td><td>${r[10]||'-'}</td></tr>`).join('');
+    }
+
+    async function save(entry) {
+        document.getElementById('loader').style.display = 'block';
+        await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(entry) });
+        await sync();
+    }
+
+    document.getElementById('altForm').onsubmit = (e) => {
+        e.preventDefault();
+        save({ type:'ALLOTMENT', project:sessionStorage.getItem('authProj'), source:document.getElementById('altSrc').value, letter:document.getElementById('altLet').value, date:document.getElementById('altDat').value, order:document.getElementById('altOrd').value, head:document.getElementById('altHead').value, unit:document.getElementById('altUnit').value, amount:document.getElementById('altAmt').value });
+        e.target.reset();
+    };
+
+    document.getElementById('expForm').onsubmit = (e) => {
+        e.preventDefault();
+        save({ type:'EXPENDITURE', project:sessionStorage.getItem('authProj'), source:document.getElementById('expSrc').value, order:document.getElementById('expOrd').value, date:document.getElementById('expDat').value, bill:document.getElementById('expBill').value, head:document.getElementById('expHead').value, unit:document.getElementById('expUnit').value, amount:document.getElementById('expAmt').value, purpose:document.getElementById('expPur').value });
+        e.target.reset();
+    };
+
+    function showTab(e, id) {
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        e.currentTarget.classList.add('active');
+    }
+
+    function exportXLS() {
+        XLSX.utils.writeFile(XLSX.utils.table_to_book(document.getElementById("fullTable")), "Office_Report.xlsx");
+    }
+</script>
+</body>
+</html>
