@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>आंगनवाड़ी केंद्र मार्गदर्शिका</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f2f5; padding: 15px; margin: 0; }
+        .container { max-width: 1200px; margin: auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #075e54; margin-bottom: 20px; }
+        .search-box { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; box-sizing: border-box; outline: none; }
+        .table-wrapper { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; min-width: 1000px; }
+        th { background-color: #075e54; color: white; padding: 12px; text-align: left; font-size: 14px; }
+        td { padding: 12px; border-bottom: 1px solid #eee; font-size: 14px; vertical-align: top; }
+        .btn { border: none; padding: 8px 12px; cursor: pointer; border-radius: 6px; font-size: 13px; color: white; font-weight: bold; text-decoration: none; display: inline-block; margin: 2px; }
+        .btn-nav { background: #34b7f1; } 
+        .btn-map { background: #128c7e; } 
+        #mapSection { display: none; margin-top: 20px; border: 2px solid #075e54; border-radius: 10px; overflow: hidden; }
+        iframe { width: 100%; height: 450px; border: none; }
+        .coords { font-size: 11px; color: #666; display: block; margin-top: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>📍 आंगनवाड़ी केंद्र मार्गदर्शिका</h2>
+    
+    <input type="text" id="searchInput" class="search-box" placeholder="पंचायत, केंद्र या सेविका का नाम खोजें..." onkeyup="filterTable()">
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>पंचायत</th>
+                    <th>केंद्र विवरण (नाम/कोड)</th>
+                    <th>सेविका का नाम</th>
+                    <th>सेक्टर </th>
+                    <th>मोबाइल नंबर</th>
+                    <th>लोकेशन (Lat, Lng)</th>
+                    <th>कार्रवाई</th>
+                </tr>
+            </thead>
+            <tbody id="centerData"></tbody>
+        </table>
+    </div>
+
+    <!-- पेज में मैप देखने के लिए -->
+    <div id="mapSection">
+        <div style="background:#075e54; color:white; padding:10px; display:flex; justify-content:space-between; align-items:center;">
+            <span id="mapTitle">केंद्र की स्थिति</span>
+            <button onclick="document.getElementById('mapSection').style.display='none'" style="background:red; color:white; border:none; cursor:pointer; padding: 5px 10px; border-radius: 4px;">बंद करें ×</button>
+        </div>
+        <iframe id="mapFrame" src=""></iframe>
+    </div>
+</div>
+
+<script>
+    // केंद्र का डेटा (आप यहाँ और केंद्र जोड़ सकते हैं)
+    const centers = [
+
+
+
+    { 
+        panchayat: "SANDA", 
+        name: "GULARIYA BIGHA 46", 
+        code: "46", 
+        sevika: "KUMARI MAHASUNDARI", 
+        sector: "Sector-02", 
+        mobile: "6200893958", 
+        lat: 25.327552, 
+        lng: 85.074332 
+    },
+    { 
+        panchayat: "Dewan", 
+        name: "Dewan 25", 
+        code: "25", 
+        sevika: "ANITA DEVI", 
+        sector: "Sector-01", 
+        mobile: "9546390587", 
+        lat: 25.364518, 
+        lng: 85.042757 
+    },
+    { 
+        panchayat: "Dewan", 
+        name: "Milk Devan 26", 
+        code: "26", 
+        sevika: "MALTI KUMARI", 
+        sector: "Sector-01", 
+        mobile: "8809103796", 
+        lat: 25.358194, 
+        lng: 85.035077 
+    },
+    { 
+        panchayat: "Dewan", 
+        name: "Tadwan 27", 
+        code: "27", 
+        sevika: "VACENT", 
+        sector: "Sector-01", 
+        mobile: "8809164751", 
+        lat: 25.312851, 
+        lng: 85.089181 
+    },
+    
+{ 
+        panchayat: "Dewan", 
+        name: "Sewai 28", 
+        code: "28", 
+        sevika: "Nilam Nishat", 
+        sector: "Sector-01", 
+        mobile: "8210250575", 
+        lat: 25.309984, 
+        lng: 85.100378 
+    },
+    { 
+        panchayat: "Dewan", 
+        name: "Bara 29", 
+        code: "29", 
+        sevika: "KUMARI SANDHYA", 
+        sector: "Sector-01", 
+        mobile: "6287872579", 
+        lat: 25.391067, 
+        lng: 85.113469 
+    },
+    { 
+        panchayat: "Dewan", 
+        name: "Repura 30", 
+        code: "30", 
+        sevika: "NITU KUMARI", 
+        sector: "Sector-01", 
+        mobile: "9572344027", 
+        lat: 25.337791, 
+        lng: 85.088392 
+    },
+    { 
+        panchayat: "Dewan", 
+        name: "Agarpur 127", 
+        code: "127", 
+        sevika: "NISHU KUMARI", 
+        sector: "Sector-01", 
+        mobile: "7991180175", 
+        lat: 25.353235, 
+        lng: 85.03827 
+    },
+    { 
+        panchayat: "Dewan", 
+        name: "Lodipur 161 161", 
+        code: "161", 
+        sevika: "RANJU KUMARI", 
+        sector: "Sector-01", 
+        mobile: "8809164751", 
+        lat: 25.312851, 
+        lng: 85.089181 
+    },
+    { 
+        panchayat: "Dewan", 
+        name: "Daulatpur 162", 
+        code: "162", 
+        sevika: "ARPANA SINHA", 
+        sector: "Sector-01", 
+        mobile: "9006864385", 
+        lat: 25.343738, 
+        lng: 85.042993 
+    },
+    { 
+        panchayat: "Dewan", 
+        name: "Pokharpar 220", 
+        code: "220", 
+        sevika: "PARWATI KUMARI", 
+        sector: "Sector-01", 
+        mobile: "8809164622", 
+        lat: 25.349484, 
+        lng: 85.040506 
+    },
+    { 
+        panchayat: "Dewan", 
+        name: "Pandey Bigha 221", 
+        code: "221", 
+        sevika: "KIRAN KUMARI", 
+        sector: "Sector-01", 
+        mobile: "9334408425", 
+        lat: 25.610437, 
+        lng: 85.124753 
+    },
+    { 
+        panchayat: "Dewan", 
+        name: "Milk Dewan 268", 
+        code: "268", 
+        sevika: "Shashibha Kumari", 
+        sector: "Sector-01", 
+        mobile: "9661794140", 
+        lat: 25.314571, 
+        lng: 85.081795 
+    },
+    { 
+        panchayat: "Dewan", 
+        name: "Bara 269", 
+        code: "269", 
+        sevika: "Prabha Kumari", 
+        sector: "Sector-01", 
+        mobile: "8235575069", 
+        lat: 25.326476, 
+        lng: 85.099841 
+    },
+    { 
+        panchayat: "NIMADA", 
+        name: "Nimda 19", 
+        code: "19", 
+        sevika: "RANJU KUMARI", 
+        sector: "Sector-01", 
+        mobile: "8210617379", 
+        lat: 25.333481, 
+        lng: 85.112112 
+    },
+    { 
+        panchayat: "NIMADA", 
+        name: "Panditganj 20", 
+        code: "20", 
+        sevika: "NEELAM KUMARI", 
+        sector: "Sector-01", 
+        mobile: "6287872243", 
+        lat: 25.390996, 
+        lng: 85.11362 
+    },
+    { 
+        panchayat: "NIMADA", 
+        name: "Mankipar 21", 
+        code: "21", 
+        sevika: "RAJKUMARI", 
+        sector: "Sector-01", 
+        mobile: "6203158048", 
+        lat: 25.336372, 
+        lng: 85.110166 
+    },
+    { 
+        panchayat: "NIMADA", 
+        name: "Harla 22", 
+        code: "22", 
+        sevika: "URMILA KUMARI", 
+        sector: "Sector-01", 
+        mobile: "7004305974", 
+        lat: 25.334155, 
+        lng: 85.110166 
+    },
+    { 
+        panchayat: "NIMADA", 
+        name: "Shahopur 23", 
+        code: "23", 
+        sevika: "POOJA KUMARI", 
+        sector: "Sector-01", 
+        mobile: "9939887229", 
+        lat: 25.313275, 
+        lng: 85.104329 
+    },
+    { 
+        panchayat: "NIMADA", 
+        name: "Lalbagh 24", 
+        code: "24", 
+        sevika: "KUMARI SANJU SINHA", 
+        sector: "Sector-01", 
+        mobile: "7004762094", 
+        lat: 25.324779, 
+        lng: 85.11035 
+    },
+    { 
+        panchayat: "NIMADA", 
+        name: "Nimda Paali 138", 
+        code: "138", 
+        sevika: "PINKI KUMARI", 
+        sector: "Sector-01", 
+        mobile: "8210617379", 
+        lat: 25.30985, 
+        lng: 85.100218 
+    },
+    { 
+        panchayat: "NIMADA", 
+        name: "Modaffarpur 139", 
+        code: "139", 
+        sevika: "MAMTA KUMARI", 
+        sector: "Sector-01", 
+        mobile: "9931504022", 
+        lat: 25.311619, 
+        lng: 85.104782 
+    },
+    { 
+        panchayat: "NIMADA", 
+        name: "Harla 189", 
+        code: "189", 
+        sevika: "VAIJANTI DEVI", 
+        sector: "Sector-01", 
+        mobile: "6200300757", 
+        lat: 25.364433, 
+        lng: 85.136088 
+    },
+    { 
+        panchayat: "NIMADA", 
+        name: "Daultabad 190", 
+        code: "190", 
+        sevika: "KHUSHABU KUMARI", 
+        sector: "Sector-01", 
+        mobile: "7258834242", 
+        lat: 25.321983, 
+        lng: 85.103659 
+    },
+    { 
+        panchayat: "NIMADA", 
+        name: "Parmanki 191", 
+        code: "191", 
+        sevika: "PINKI KUMARI", 
+        sector: "Sector-01", 
+        mobile: "9065536940", 
+        lat: 25.33374, 
+        lng: 85.106313 
+    },
+    { 
+        panchayat: "Hulaschak Veer", 
+        name: "Daulta 200", 
+        code: "200", 
+        sevika: "SUNITA KUMARI", 
+        sector: "Sector-01", 
+        mobile: "7321050234", 
+        lat: 25.364156, 
+        lng: 85.136007 
+    },
+    { 
+        panchayat: "NIMADA", 
+        name: "Nemra 267", 
+        code: "267", 
+        sevika: "Sabita Kumari", 
+        sector: "Sector-01", 
+        mobile: "8294680194", 
+        lat: 25.320589, 
+        lng: 85.124434 
+    },
+  { 
+        panchayat: "SANDA", 
+        name: "RASALPUR 45", 
+        code: "45", 
+        sevika: "MANJU KUMARI", 
+        sector: "Sector-02", 
+        mobile: "7870633993", 
+        lat: 25.344063, 
+        lng: 85.074805 
+    },
+    { 
+        panchayat: "MORIYAWAN", 
+        name: "Rarha 5", 
+        code: "5", 
+        sevika: "USHA KUMARI", 
+        sector: "Sector-02", 
+        mobile: "8406011799", 
+        lat: 25.34707, 
+        lng: 85.125413 
+    },
+    { 
+        panchayat: "MORIYAWAN", 
+        name: "Moriyawan Mu. 39", 
+        code: "39", 
+        sevika: "INDU DEVI", 
+        sector: "Sector-02", 
+        mobile: "6203171153", 
+        lat: 25.353498, 
+        lng: 85.125407 
+    },
+    { 
+        panchayat: "MORIYAWAN", 
+        name: "Moriyawan 40", 
+        code: "40", 
+        sevika: "KAMINI KUMARI", 
+        sector: "Sector-02", 
+        mobile: "7209055145", 
+        lat: 25.350547, 
+        lng: 85.111467 
+    },
+    { 
+        panchayat: "MORIYAWAN", 
+        name: "Sai 41", 
+        code: "41", 
+        sevika: "VACENT", 
+        sector: "Sector-02", 
+        mobile: "7033053482", 
+        lat: 25.357268, 
+        lng: 85.10866 
+    },
+    { 
+        panchayat: "MORIYAWAN", 
+        name: "Dilawarchak Paswan Tola 42", 
+        code: "42", 
+        sevika: "PANWASIYA DEVI", 
+        sector: "Sector-02", 
+        mobile: "6287824410", 
+        lat: 25.361115, 
+        lng: 85.114626 
+    },
+    { 
+        panchayat: "MORIYAWAN", 
+        name: "Chakrarha 152", 
+        code: "152", 
+        sevika: "SUDAMI KUMARI", 
+        sector: "Sector-02", 
+        mobile: "7033137975", 
+        lat: 25.35063, 
+        lng: 85.122558 
+    },
+    { 
+        panchayat: "MORIYAWAN", 
+        name: "Kukurbara 153", 
+        code: "153", 
+        sevika: "GEETA KUMARI", 
+        sector: "Sector-02", 
+        mobile: "8102037405", 
+        lat: 25.351991, 
+        lng: 85.090442 
+    },
+    { 
+        panchayat: "MORIYAWAN", 
+        name: "Chaksai 154", 
+        code: "154", 
+        sevika: "SANGEETA KUMARI", 
+        sector: "Sector-02", 
+        mobile: "8292819582", 
+        lat: 25.369983, 
+        lng: 85.111138 
+    },
+    { 
+        panchayat: "MORIYAWAN", 
+        name: "Sai 212", 
+        code: "212", 
+        sevika: "SUMAN KUMARI", 
+        sector: "Sector-02", 
+        mobile: "7033053482", 
+        lat: 25.35963, 
+        lng: 85.108322 
+    },
+    { 
+        panchayat: "MORIYAWAN", 
+        name: "Bhaipur 213", 
+        code: "213", 
+        sevika: "BASANTI KUMARI", 
+        sector: "Sector-02", 
+        mobile: "6205940360", 
+        lat: 25.348029, 
+        lng: 85.132665 
+    },
+    { 
+        panchayat: "MORIYAWAN", 
+        name: "Moriyawan 239", 
+        code: "239", 
+        sevika: "Runi Kumari", 
+        sector: "Sector-02", 
+        mobile: "7082478459", 
+        lat: 25.347817, 
+        lng: 85.110825 
+    },
+    { 
+        panchayat: "MORIYAWAN", 
+        name: "Kalichak Ramjanichak 240", 
+        code: "240", 
+        sevika: "Vina Kumari", 
+        sector: "Sector-02", 
+        mobile: "9304054244", 
+        lat: 25.360919, 
+        lng: 85.113717 
+    },
+    { 
+        panchayat: "SANDA", 
+        name: "Sanda Purvi 43", 
+        code: "43", 
+        sevika: "MADHUMATI DEVI", 
+        sector: "Sector-02", 
+        mobile: "9835986355", 
+        lat: 25.344643, 
+        lng: 85.076467 
+    },
+    { 
+        panchayat: "SANDA", 
+        name: "Sanda Paschim 44", 
+        code: "44", 
+        sevika: "POOJAM DEVI", 
+        sector: "Sector-02", 
+        mobile: "7481846635", 
+        lat: 25.350688, 
+        lng: 85.085189 
+    },
+    { 
+        panchayat: "SANDA", 
+        name: "Bhedgawan 47", 
+        code: "47", 
+        sevika: "GIRJA DEVI", 
+        sector: "Sector-02", 
+        mobile: "9155442871", 
+        lat: 25.340946, 
+        lng: 85.092432 
+    },
+    { 
+        panchayat: "SANDA", 
+        name: "Atarpura 48", 
+        code: "48", 
+        sevika: "SHAGUFTA NAAZ", 
+        sector: "Sector-02", 
+        mobile: "9262319044", 
+        lat: 25.358084, 
+        lng: 85.100591 
+    },
+    { 
+        panchayat: "SANDA", 
+        name: "Chanaki 49", 
+        code: "49", 
+        sevika: "MANJU SINHA", 
+        sector: "Sector-02", 
+        mobile: "9204258283", 
+        lat: 25.353872, 
+        lng: 85.080971 
+    },
+    { 
+        panchayat: "SANDA", 
+        name: "Simri 50", 
+        code: "50", 
+        sevika: "RADHA SHARMA", 
+        sector: "Sector-02", 
+        mobile: "9546899021", 
+        lat: 25.362755, 
+        lng: 85.073905 
+    },
+    { 
+        panchayat: "SANDA", 
+        name: "Kolhachak 51", 
+        code: "51", 
+        sevika: "UMA KUMARI", 
+        sector: "Sector-02", 
+        mobile: "9771753270", 
+        lat: 25.364168, 
+        lng: 85.13602 
+    },
+    { 
+        panchayat: "SANDA", 
+        name: "Mathiyapar 133", 
+        code: "133", 
+        sevika: "RENU RAI", 
+        sector: "Sector-02", 
+        mobile: "9334181868", 
+        lat: 25.347283, 
+        lng: 85.04897 
+    },
+    { 
+        panchayat: "SANDA", 
+        name: "Kistipur 134", 
+        code: "134", 
+        sevika: "MANJU KUMARI SINHA", 
+        sector: "Sector-02", 
+        mobile: "7858819157", 
+        lat: 25.352176, 
+        lng: 85.068069 
+    },
+    { 
+        panchayat: "SANDA", 
+        name: "Sanda Dakshin 172", 
+        code: "172", 
+        sevika: "SHOBHA KUMARI", 
+        sector: "Sector-02", 
+        mobile: "8292584683", 
+        lat: 25.364395, 
+        lng: 85.136139 
+    },
+    { 
+        panchayat: "SANDA", 
+        name: "Sitachak 181", 
+        code: "181", 
+        sevika: "MADHAVI KUMARI", 
+        sector: "Sector-02", 
+        mobile: "7488585990", 
+        lat: 25.361637, 
+        lng: 85.092326 
+    },
+    { 
+        panchayat: "SANDA", 
+        name: "Mahadev Bigaha 182", 
+        code: "182", 
+        sevika: "USHA KUMARI", 
+        sector: "Sector-02", 
+        mobile: "9572108213", 
+        lat: 25.337933, 
+        lng: 85.065651 
+    },
+    { 
+        panchayat: "SANDA", 
+        name: "Bhedgawan 183", 
+        code: "183", 
+        sevika: "PRITI KUMARI", 
+        sector: "Sector-02", 
+        mobile: "8809164974", 
+        lat: 25.342697, 
+        lng: 85.095755 
+    },
+   
+    { 
+        panchayat: "SANDA", 
+        name: "GULARIYA BIGHA 46", 
+        code: "46", 
+        sevika: "KUMARI MAHASUNDARI", 
+        sector: "Sector-02", 
+        mobile: "6200893958", 
+        lat: 25.327552, 
+        lng: 85.074332 
+    },
+    { 
+        panchayat: "SANDA", 
+        name: "Dewan 25", 
+        code: "25", 
+        sevika: "ANITA DEVI", 
+        sector: "Sector-01", 
+        mobile: "9546390587", 
+        lat: 25.364518, 
+        lng: 85.042757 
+    },
+    { 
+        panchayat: "SANDA", 
+        name: "Milk Devan 26", 
+        code: "26", 
+        sevika: "MALTI KUMARI", 
+        sector: "Sector-01", 
+        mobile: "8809103796", 
+        lat: 25.358194, 
+        lng: 85.035077 
+    },
+    { 
+        panchayat: "NIMADA", 
+        name: "Nimda 19", 
+        code: "19", 
+        sevika: "RANJU KUMARI", 
+        sector: "Sector-01", 
+        mobile: "8210617379", 
+        lat: 25.333481, 
+        lng: 85.112112 
+    },
+    { 
+        panchayat: "MORIYAWAN", 
+        name: "Rarha 5", 
+        code: "5", 
+        sevika: "USHA KUMARI", 
+        sector: "Sector-02", 
+        mobile: "8406011799", 
+        lat: 25.34707, 
+        lng: 85.125413 
+    },
+    { 
+        panchayat: "BARANI", 
+        name: "Barni 52", 
+        code: "52", 
+        sevika: "NIRMALA DEVI", 
+        sector: "Sector-03", 
+        mobile: "7779885651", 
+        lat: 25.364166, 
+        lng: 85.136162 
+    },
+    { 
+        panchayat: "KOSUT", 
+        name: "Kewada 56", 
+        code: "56", 
+        sevika: "ARUNA KUMARI", 
+        sector: "Sector-03", 
+        mobile: "8298914646", 
+        lat: 25.372359, 
+        lng: 85.062233 
+    },
+    { 
+        panchayat: "VEER", 
+        name: "Ramnagar 201", 
+        code: "201", 
+        sevika: "PUSHPA KUMARI", 
+        sector: "Sector-04", 
+        mobile: "7979744851", 
+        lat: 25.421539, 
+        lng: 85.179219 
+    },
+    { 
+        panchayat: "Devdaha", 
+        name: "Devdaha 108", 
+        code: "108", 
+        sevika: "NIBHA KUMARI", 
+        sector: "Sector-04", 
+        mobile: "9162980408", 
+        lat: 25.385082, 
+        lng: 85.142264 
+    },
+    { 
+        panchayat: "Satparsa", 
+        name: "Satparsa 12", 
+        code: "12", 
+        sevika: "VACENT", 
+        sector: "Sector-05", 
+        mobile: "8294726270", 
+        lat: 25.372227, 
+        lng: 85.097544 
+    },
+    { 
+        panchayat: "Dhanarua", 
+        name: "Dhanarua 1", 
+        code: "1", 
+        sevika: "PANDEY NEERA RANI", 
+        sector: "Sector-05", 
+        mobile: "7634868142", 
+        lat: 25.357298, 
+        lng: 85.128785 
+    },
+    { 
+        panchayat: "MAI-NETAUL", 
+        name: "Netaul 31", 
+        code: "31", 
+        sevika: "AFREENA KHATOON", 
+        sector: "Sector-06", 
+        mobile: "9304375480", 
+        lat: 25.288301, 
+        lng: 85.083335 
+    },
+    { 
+        panchayat: "BARI BIGHA", 
+        name: "Baribigaha 36", 
+        code: "36", 
+        sevika: "SONEPHOOL KUMARI", 
+        sector: "Sector-06", 
+        mobile: "7250995607", 
+        lat: 25.302243, 
+        lng: 85.070604 
+    },
+    { 
+        panchayat: "GOVINDPUR-BA", 
+        name: "Baurhi 90", 
+        code: "90", 
+        sevika: "VACENT RETIRED", 
+        sector: "Sector-07", 
+        mobile: "6202087670", 
+        lat: 25.40399, 
+        lng: 85.124133 
+    },
+    { 
+        panchayat: "SONMAI", 
+        name: "Sonemai 102", 
+        code: "102", 
+        sevika: "MANJU KUMARI", 
+        sector: "Sector-07", 
+        mobile: "8051319781", 
+        lat: 25.423881, 
+        lng: 85.135007 
+    },
+    { 
+        panchayat: "CHATI", 
+        name: "Chhati 67", 
+        code: "67", 
+        sevika: "LILA KUMARI", 
+        sector: "Sector-08", 
+        mobile: "7321048425", 
+        lat: 25.349077, 
+        lng: 85.176079 
+    },
+    { 
+        panchayat: "Paveda", 
+        name: "Paveda Purab 63", 
+        code: "63", 
+        sevika: "PUNAM KUMARI", 
+        sector: "Sector-08", 
+        mobile: "7654304225", 
+        lat: 25.367822, 
+        lng: 85.175245 
+    },
+    { 
+        panchayat: "Bahrampur", 
+        name: "Bahrampur 69", 
+        code: "69", 
+        sevika: "VACENT", 
+        sector: "Sector-09", 
+        mobile: "6287836028", 
+        lat: 25.318078, 
+        lng: 85.144624 
+    },
+    { 
+        panchayat: "Vijaypura", 
+        name: "Kaili 6", 
+        code: "6", 
+        sevika: "NIRMALA DEVI", 
+        sector: "Sector-09", 
+        mobile: "9973474441", 
+        lat: 25.345675, 
+        lng: 85.134996 
+    },
+    { 
+        panchayat: "Nadwan", 
+        name: "Nadwan 80", 
+        code: "80", 
+        sevika: "MANORMA KUMARI", 
+        sector: "Sector-10", 
+        mobile: "8092777613", 
+        lat: 25.39845, 
+        lng: 85.06911 
+    },
+    { 
+        panchayat: "pathrahat", 
+        name: "Pathrahat 85", 
+        code: "85", 
+        sevika: "SHARDA KUMARI", 
+        sector: "Sector-10", 
+        mobile: "7903338367", 
+        lat: 25.394899, 
+        lng: 85.084438 
+    }
+
+
+
+
+
+
+    ];
+
+    function render() {
+        const tbody = document.getElementById('centerData');
+        tbody.innerHTML = centers.map(c => {
+            // गूगल मैप्स 'Directions' लिंक: यह दूरी और संभावित रास्ते दिखाता है
+            const navUrl = "https://www.google.com/maps/dir/?api=1&destination=" + c.lat + "," + c.lng + "&travelmode=driving";
+            
+            return `
+                <tr>
+                    <td>${c.panchayat}</td>
+                    <td><b>${c.name}</b><br><small>कोड: ${c.code}</small></td>
+                    <td>${c.sevika}</td>
+                    <td>${c.sector}</td>
+                    <td><a href="tel:${c.mobile}" style="color:#075e54; font-weight:bold; text-decoration:none;">${c.mobile}</a></td>
+                    <td><span class="coords">${c.lat}, ${c.lng}</span></td>
+                    <td>
+                        <button class="btn btn-map" onclick="viewMap(${c.lat}, ${c.lng}, '${c.name}')">मैप देखें</button>
+                        <a href="${navUrl}" target="_blank" class="btn btn-nav">रास्ता देखें</a>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    // इसी पेज में मिनी मैप लोड करने के लिए
+    function viewMap(lat, lng, name) {
+        const frame = document.getElementById('mapFrame');
+        const section = document.getElementById('mapSection');
+        // 'q' पैरामीटर पिन (Marker) दिखाता है
+        const embedUrl = "https://google.com" + lat + "," + lng + "&hl=hi&z=15&output=embed";
+        
+        frame.src = embedUrl;
+        document.getElementById('mapTitle').innerText = "केंद्र: " + name;
+        section.style.display = 'block';
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
+
+// १. फिक्स्ड मैप लोड (No IP error)
+    function viewMap(lat, lng, name) {
+        const frame = document.getElementById('mapFrame');
+        // Proper structure: ://google.com
+        const embedUrl = "https://www.google.com/maps?q=" + lat + "," + lng + "&hl=hi&z=15&output=embed";
+        frame.src = embedUrl;
+        document.getElementById('mapTitle').innerText = name;
+        document.getElementById('mapSection').style.display = 'block';
+    }
+// २. व्हाट्सएप शेयर फीचर
+    function shareWA(name, lat, lng) {
+        const mapUrl = "https://www.google.com/maps?q=" + lat + "," + lng;
+        const text = encodeURIComponent("केंद्र: " + name + "\nलोकेशन देखें: " + mapUrl);
+        window.open("https://whatsapp.com" + text, "_blank");
+    }
+
+
+    // सर्च फंक्शन
+    function filterTable() {
+        const val = document.getElementById("searchInput").value.toLowerCase();
+        const rows = document.querySelectorAll("#centerData tr");
+        rows.forEach(r => {
+            r.style.display = r.innerText.toLowerCase().includes(val) ? "" : "none";
+        });
+    }
+function filterTable() {
+        const val = document.getElementById("searchInput").value.toLowerCase();
+        const rows = document.querySelectorAll("#centerData tr");
+        rows.forEach(r => r.style.display = r.innerText.toLowerCase().includes(val) ? "" : "none");
+    }
+
+    window.onload = render;
+</script>
+</body>
+</html>
