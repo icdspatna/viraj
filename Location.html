@@ -19,12 +19,33 @@
         #mapSection { display: none; margin-top: 20px; border: 2px solid #075e54; border-radius: 10px; overflow: hidden; }
         iframe { width: 100%; height: 450px; border: none; }
         .coords { font-size: 11px; color: #666; display: block; margin-top: 4px; }
+
+    .nav-btn {
+    background: #FF69B4; /* Pink */
+    color: #FFFFFF;    /* White */
+    transition: 0.3s;
+}
+
+.nav-btn:hover {
+    background: #FF0000; /* Red on hover */
+}
+
+        
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>📍 आंगनवाड़ी केंद्र मार्गदर्शिका</h2>
+
+<div style="display: flex; justify-content: flex-start; margin-bottom: 15px;">
+        <a href="index.html" class="home-btn" style="text-decoration: none;">
+            <button type="button" class="nav-btn" style="background: #FF69B4; color: #FFFFFF; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px; font-weight: bold;">
+                🏠 Home
+            </button>
+        </a>
+    </div>
+    
+    <h2>📍 आंगनवाड़ी केंद्र पथ प्रदर्शक </h2>
     
     <input type="text" id="searchInput" class="search-box" placeholder="पंचायत, केंद्र या सेविका का नाम खोजें..." onkeyup="filterTable()">
 
