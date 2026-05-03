@@ -48,6 +48,29 @@
 
         input, select, textarea { width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
         .submit-btn { background: #28a745; color: white; border: none; padding: 12px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; }
+
+/* Basic styling to match your dashboard */
+.home-btn {
+    padding: 5px 15px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.home-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.logout-btn {
+    padding: 5px 15px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+        
     </style>
 </head>
 <body>
@@ -67,6 +90,7 @@
     <div class="top-bar">
         <h2 style="margin:0">Finance Dashboard</h2>
         <div style="display:flex; align-items:center; gap:15px;">
+            <button class="home-btn" onclick="goHome()">Home</button>
             <select id="mainProject" disabled>
                 <option value="DHANRUA">DHANRUA</option>
                 <option value="BEGUSARAI GRAMIN">BEGUSARAI GRAMIN</option>
@@ -255,5 +279,25 @@
         XLSX.utils.writeFile(XLSX.utils.table_to_book(document.getElementById("fullTable")), "Office_Report.xlsx");
     }
 </script>
+
+
+
+    <script>
+function goHome() {
+    // 1. Clear session/local storage if needed
+    localStorage.clear(); 
+    sessionStorage.clear();
+
+    // 2. Redirect to your home or login page
+    window.location.href = "index.html"; // Change "index.html" to your actual home URL
+}
+
+function logout() {
+    // Your existing logout logic
+    alert("Logging out...");
+    window.location.href = "login.html";
+}
+</script>
+    
 </body>
 </html>
