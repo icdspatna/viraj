@@ -71,8 +71,45 @@ img {
     max-width: 100%;
     height: auto;
 }
-```
 
+/* Updated Home Page Layout with 3 columns */
+.home-grid { 
+    display: grid; 
+    grid-template-columns: 200px 2fr 1fr; /* Left column fixed at 200px */
+    gap: 20px; 
+}
+
+/* Style for the new Link Box */
+.link-sidebar {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.side-link {
+    display: block;
+    padding: 10px;
+    background: #f8f9fa;
+    color: var(--primary);
+    text-decoration: none;
+    border-left: 4px solid var(--primary);
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.side-link:hover {
+    background: var(--primary);
+    color: white;
+}
+
+
+
+		
 	 <link rel="stylesheet" href="https://cloudflare.com">
 	</style>
    
@@ -103,6 +140,18 @@ img {
 <!-- PAGE 1: HOME -->
 <div id="p1" class="page active">
     <div class="home-grid">
+<!-- NEW LEFT SIDEBAR FOR LINKS -->
+        <aside class="link-sidebar">
+            <h3 style="color:var(--primary); font-size: 16px; margin-top:0;">महत्वपूर्ण लिंक</h3>
+            <a href="https://pib.gov.in" class="side-link" target="_blank">PIB बिहार</a>
+            <a href="#" class="side-link">Direct Benefit Transfer</a>
+            <a href="#" class="side-link">पेंशन पोर्टल</a>
+            <a href="#" class="side-link">शिकायत पंजीकरण</a>
+            <a href="#" class="side-link">ई-कल्याण</a>
+        </aside>
+
+
+		
         <div class="splash-slider" id="slider">
             <img src="25.jpg" class="slide" style="display:block">
             <img src="29.jpg" class="slide">
